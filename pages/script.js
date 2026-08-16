@@ -44,4 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
             newsletterForm.reset();
         });
     }
+
+    // "Show more" functionality on flights page
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const extraFlights = document.getElementById('extra-flights');
+
+    if (showMoreBtn && extraFlights) {
+        showMoreBtn.addEventListener('click', () => {
+            // Show the extra flight cards
+            extraFlights.classList.remove('hidden');
+            // Hide the "Show more" button itself
+            showMoreBtn.style.display = 'none';
+        });
+    }
 });

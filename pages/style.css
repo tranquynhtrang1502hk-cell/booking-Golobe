@@ -82,6 +82,22 @@ body {
     cursor: pointer;
 }
 
+.btn-text-dark {
+    background: transparent;
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.btn-dark {
+    background: var(--secondary);
+    color: var(--white);
+}
+
+.btn-dark:hover {
+    background: #333;
+}
+
+
 /* Navbar */
 header {
     padding: 24px 0;
@@ -91,6 +107,12 @@ header {
     left: 0;
     right: 0;
     z-index: 100;
+}
+
+.static-header {
+    padding: 24px 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
 }
 
 .navbar {
@@ -119,6 +141,14 @@ header {
 
 .nav-links a:hover {
     opacity: 0.8;
+}
+
+.header-link {
+    color: var(--secondary) !important;
+}
+
+.dark-logo {
+    color: var(--secondary);
 }
 
 .logo {
@@ -593,4 +623,194 @@ footer {
     .newsletter-form input {
         width: 100%;
     }
+}
+
+/* Flight Results Page */
+.results-search-container {
+    background: var(--primary);
+    padding: 24px 0;
+}
+
+.results-search-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 16px;
+}
+
+.results-search-form .field-group {
+    border: none;
+    background: var(--white);
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.results-search-form .field-group input,
+.results-search-form .field-group select {
+    padding: 0;
+}
+
+.results-search-form .field-group label {
+    display: none;
+}
+
+.results-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    padding: 40px 0;
+}
+
+.filters-sidebar {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    height: fit-content;
+}
+
+.filters-sidebar > h4 {
+    font-size: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-group {
+    margin-bottom: 24px;
+}
+
+.filter-group h5 {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.price-range {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: var(--border);
+    outline: none;
+    border-radius: 2px;
+}
+
+.price-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--secondary);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.price-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.rating-stars {
+    color: #FFC107;
+}
+
+.flight-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.airline-logo img {
+    max-width: 80px;
+    max-height: 40px;
+    object-fit: contain;
+}
+
+.flight-details {
+    text-align: center;
+}
+
+.flight-time {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.flight-path {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.flight-path .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--text-muted);
+}
+
+.flight-path .line {
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 100px;
+}
+
+.flight-info {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.flight-booking {
+    text-align: right;
+}
+
+.flight-rating {
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+}
+.flight-rating .fa-star { color: #FFC107; }
+.flight-rating span { color: var(--text-muted); font-size: 12px; }
+
+.flight-price .price-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.flight-price .price-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.show-more {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.hidden {
+    display: none;
 }
