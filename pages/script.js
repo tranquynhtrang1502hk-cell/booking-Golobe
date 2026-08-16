@@ -26,13 +26,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Search form submission
-    const searchForm = document.getElementById('search-form');
-    if (searchForm) {
-        searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Searching for places... (Form submitted)');
-        });
-    }
+const searchForm = document.getElementById('search-form');
+
+if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // 1. Lấy giá trị từ các ô input / select trong Form
+        const locationInput = document.getElementById('from-to')?.value.toLowerCase().trim() || '';
+        const tripType = document.getElementById('trip-type')?.value.toLowerCase() || '';
+        const departReturn = document.getElementById('depart-return')?.value.toLowerCase() || '';
+        const passengerClass = document.getElementById('passenger-class')?.value.toLowerCase() || '';
+
+        // 2. Kiểm tra các điều kiện để quyết định chuyển sang file nào
+        
+        // Điều kiện 1: Ưu tiên chọn theo tên Hãng / Địa điểm nhập ở From - To
+        if (locationInput.includes('emirates') || locationInput.includes('lahore')) {
+            window.location.href = 'flight-detail-emirates-1.html';
+        } 
+        else if (locationInput.includes('dubai') || locationInput.includes('flydubai')) {
+            window.location.href = 'flight-detail-flydubai-1.html';
+        } 
+        else if (locationInput.includes('qatar') || locationInput.includes('doha')) {
+            window.location.href = 'flight-detail-qatar-1.html';
+        } 
+        // Điều kiện 2: Kiểm tra theo Hạng ghế (Passenger - Class)
+        else if (passengerClass.includes('first class') || passengerClass.includes('business')) {
+            window.location.href = 'flight-detail-emirates-1.html';
+        } 
+        else if (passengerClass.includes('economy')) {
+            window.location.href = 'flight-detail-flydubai-1.html';
+        } 
+        // Điều kiện 3: Kiểm tra Loại vé (Trip: One Way / Return)
+        else if (tripType.includes('one way')) {
+            window.location.href = 'flight-detail-qatar-1.html';
+        } 
+        // Mặc định chuyển về file Emirates nếu không khớp các điều kiện trên
+        else {
+            window.location.href = 'flight-detail-emirates-1.html';
+        }
+    });
+}
 
     // Newsletter form submission
     const newsletterForm = document.getElementById('newsletter-form');
