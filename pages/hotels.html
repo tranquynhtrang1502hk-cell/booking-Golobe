@@ -1,43 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotels - Golobe</title>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Montserrat) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golobe - Find Hotels & Stays</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <style>
-        .results-page {
-            padding-top: 120px; /* Space for header */
-            padding-bottom: 80px;
+        /* Additional styles for hotel page */
+        .hotel-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .hotel-card-link:hover .hotel-card {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .hotel-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .destination-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--secondary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
-    <!-- Header / Navbar -->
-    <header style="position: static; background: var(--primary);">
+
+    <!-- Header -->
+    <header class="static-header">
         <div class="container navbar">
             <ul class="nav-links">
-                <li><a href="index.html#flights-section"><i class="fa-solid fa-plane"></i> Find Flight</a></li>
-                <li><a href="index.html#stays-section"><i class="fa-solid fa-bed"></i> Find Stays</a></li>
+                <li><a href="flights.html" class="header-link"><i class="fa-solid fa-plane"></i> Find Flight</a></li>
+                <li><a href="hotels.html" class="header-link"><i class="fa-solid fa-bed"></i> Find Stays</a></li>
             </ul>
-            <a href="index.html" class="logo">
+            <a href="index.html" class="logo dark-logo">
                 <i class="fa-solid fa-paper-plane"></i> Golobe
             </a>
             <div class="auth-btns">
-                <a href="login.html" class="btn btn-text">Login</a>
-                <a href="signup.html" class="btn btn-light">Sign up</a>
+                <a href="login.html" class="btn btn-text-dark">Login</a>
+                <a href="signup.html" class="btn btn-dark">Sign up</a>
             </div>
         </div>
     </header>
 
-    <main class="results-page container">
-        <h1>Available Hotels</h1>
-        <p>This is where the hotel results will be displayed.</p>
-    </main>
+    <!-- Page Banner -->
+    <section class="page-banner hotels-banner">
+        <div class="container">
+            <h1>Discover Your Perfect Stay</h1>
+            <p>Explore handpicked hotels in the world's most popular destinations</p>
+        </div>
+    </section>
+
+    <!-- Search & Filters -->
+    <div class="search-container" style="margin-top: -60px;">
+        <div class="search-card">
+            <form id="hotel-search-form">
+                <div class="search-fields">
+                    <div class="field-group">
+                        <label for="hotel-destination">Destination</label>
+                        <input type="text" id="hotel-destination" placeholder="Where are you going?" />
+                    </div>
+                    <div class="field-group">
+                        <label for="check-in">Check-in</label>
+                        <input type="date" id="check-in" />
+                    </div>
+                    <div class="field-group">
+                        <label for="check-out">Check-out</label>
+                        <input type="date" id="check-out" />
+                    </div>
+                    <div class="field-group">
+                        <label for="guests">Guests</label>
+                        <select id="guests">
+                            <option>1 Guest</option>
+                            <option selected>2 Guests</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                            <option>5+ Guests</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search Hotels</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popular Destinations -->
+    <section class="container" style="margin-top: 40px; margin-bottom: 80px;">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Discover popular destinations and plan your next perfect trip</p>
+            </div>
+            <div>
+                <select style="padding: 10px 16px; border-radius: 8px; border: 1px solid #CCC; font-weight: 600; background: white;">
+                    <option>Recommended</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Rating: Highest</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Hotel Grid - All 9 Destinations -->
+        <div class="hotel-grid" id="hotel-grid">
+            
+            <!-- 1. Istanbul, Turkey -->
+            <a href="hotel-detail.html?city=istanbul" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80" alt="Istanbul" />
+                        <span class="hotel-badge">⭐ 4.8</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Grand Istanbul Hotel</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Sultanahmet, Istanbul, Turkey</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-swimming-pool"></i> Pool</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$189</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. Sydney, Australia -->
+            <a href="hotel-detail.html?city=sydney" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80" alt="Sydney" />
+                        <span class="hotel-badge">⭐ 4.7</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Sydney Harbour Resort</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Circular Quay, Sydney, Australia</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-spa"></i> Spa</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$245</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 3. Baku, Azerbaijan -->
+            <a href="hotel-detail.html?city=baku" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=400&q=80" alt="Baku" />
+                        <span class="hotel-badge">⭐ 4.5</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Flame Towers Hotel</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Baku Boulevard, Baku, Azerbaijan</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-dumbbell"></i> Gym</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$159</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 4. Malé, Maldives -->
+            <a href="hotel-detail.html?city=male" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=80" alt="Malé" />
+                        <span class="hotel-badge">⭐ 4.9</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Overwater Paradise Resort</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> North Malé Atoll, Maldives</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-swimming-pool"></i> Pool</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$520</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 5. Paris, France -->
+            <a href="hotel-detail.html?city=paris" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=400&q=80" alt="Paris" />
+                        <span class="hotel-badge">⭐ 4.6</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Eiffel Tower Suites</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> 7th Arrondissement, Paris, France</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-eye"></i> City View</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$310</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 6. Dubai, UAE -->
+            <a href="hotel-detail.html?city=dubai" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=400&q=80" alt="Dubai" />
+                        <span class="hotel-badge">⭐ 4.9</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Burj Al Arab View Hotel</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Jumeirah, Dubai, UAE</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-swimming-pool"></i> Pool</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$450</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 7. Tokyo, Japan -->
+            <a href="hotel-detail.html?city=tokyo" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80" alt="Tokyo" />
+                        <span class="hotel-badge">⭐ 4.7</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Shinjuku Sky Tower</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Shinjuku, Tokyo, Japan</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-spa"></i> Onsen Spa</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$280</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 8. Rome, Italy -->
+            <a href="hotel-detail.html?city=rome" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=400&q=80" alt="Rome" />
+                        <span class="hotel-badge">⭐ 4.5</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Colosseum Palace</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Monti, Rome, Italy</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-dumbbell"></i> Gym</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$220</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 9. New York, USA -->
+            <a href="hotel-detail.html?city=newyork" class="hotel-card-link">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=400&q=80" alt="New York" />
+                        <span class="hotel-badge">⭐ 4.6</span>
+                    </div>
+                    <div class="hotel-body">
+                        <h3>Central Park Towers</h3>
+                        <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> Midtown, New York, USA</p>
+                        <div class="hotel-amenities">
+                            <span><i class="fa-solid fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fa-solid fa-utensils"></i> Breakfast</span>
+                            <span><i class="fa-solid fa-swimming-pool"></i> Pool</span>
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                <span class="price-label">From</span>
+                                <span class="price-value">$390</span>
+                                <span class="price-label">/ night</span>
+                            </div>
+                            <span class="destination-tag">Flights · Hotels · Resorts</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo"><i class="fa-solid fa-paper-plane"></i> Golobe</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Destinations</h4>
+                    <ul>
+                        <li><a href="#">Istanbul</a></li>
+                        <li><a href="#">Sydney</a></li>
+                        <li><a href="#">Paris</a></li>
+                        <li><a href="#">Dubai</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Activities</h4>
+                    <ul>
+                        <li><a href="#">Northern Lights</a></li>
+                        <li><a href="#">Cruising & sailing</a></li>
+                        <li><a href="#">Multi-activity</a></li>
+                        <li><a href="#">Kayaking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Travel Blogs</h4>
+                    <ul>
+                        <li><a href="#">Bali Travel Guide</a></li>
+                        <li><a href="#">Sri Lanka Travel Guide</a></li>
+                        <li><a href="#">Peru Travel Guide</a></li>
+                        <li><a href="#">Swiss Alps Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Work with us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
