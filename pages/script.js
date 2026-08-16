@@ -57,4 +57,41 @@ document.addEventListener('DOMContentLoaded', () => {
             showMoreBtn.style.display = 'none';
         });
     }
+    // ====== Hotel Search Form ======
+document.addEventListener('DOMContentLoaded', () => {
+    const hotelSearchForm = document.getElementById('hotel-search-form');
+    if (hotelSearchForm) {
+        hotelSearchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const destination = document.getElementById('hotel-destination').value;
+            const checkin = document.getElementById('check-in').value;
+            const checkout = document.getElementById('check-out').value;
+            const guests = document.getElementById('guests').value;
+
+            alert(
+                `🔍 Searching Hotels...\n\n` +
+                `📍 Destination: ${destination || 'Any'}\n` +
+                `📅 Check-in: ${checkin || 'Not set'}\n` +
+                `📅 Check-out: ${checkout || 'Not set'}\n` +
+                `👤 Guests: ${guests}\n\n` +
+                `We'll find the best hotels for you!`
+            );
+        });
+    }
+});
+// Booking Form (Book Now)
+const bookingForm = document.getElementById('booking-form');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const checkin = document.getElementById('checkin-date').value;
+        const checkout = document.getElementById('checkout-date').value;
+        const guests = document.getElementById('booking-guests').value;
+        const room = document.getElementById('room-type').value;
+
+        alert(`✅ Booking Confirmed!\n\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nRoom: ${room}\n\nThank you for choosing Golobe!`);
+    });
+}
+
 });
