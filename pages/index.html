@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golobe - Travel Agency & Flight/Hotel Booking</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="container navbar">
+            <ul class="nav-links">
+                <li><a href="#flights-section"><i class="fa-solid fa-plane"></i> Find Flight</a></li>
+                <li><a href="#stays-section"><i class="fa-solid fa-bed"></i> Find Stays</a></li>
+            </ul>
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-paper-plane"></i> Golobe
+            </a>
+            <div class="auth-btns">
+                <a href="login.html" class="btn btn-text">Login</a>
+                <a href="signup.html" class="btn btn-light">Sign up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h3 class="hero-subtitle">Helping Others</h3>
+        <h1 class="hero-title">Live & Travel</h1>
+        <p class="hero-desc">Special offers to suit your plan</p>
+    </section>
+
+    <!-- Search Form -->
+    <div class="search-container">
+        <div class="search-card">
+            <div class="search-tabs">
+                <button class="tab-btn active" data-tab="flights"><i class="fa-solid fa-plane"></i> Flights</button>
+                <button class="tab-btn" data-tab="stays"><i class="fa-solid fa-bed"></i> Stays</button>
+            </div>
+            <form id="search-form">
+                <div class="search-fields">
+                    <div class="field-group">
+                        <label for="from-to">From - To</label>
+                        <input type="text" id="from-to" value="Lahore - Karachi">
+                    </div>
+                    <div class="field-group">
+                        <label for="trip-type">Trip</label>
+                        <select id="trip-type">
+                            <option>Return</option>
+                            <option>One Way</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="depart-return">Depart - Return</label>
+                        <input type="text" id="depart-return" value="07 Nov 22 - 13 Nov 22">
+                    </div>
+                    <div class="field-group">
+                        <label for="passenger-class">Passenger - Class</label>
+                        <input type="text" id="passenger-class" value="1 Passenger, Economy">
+                    </div>
+                </div>
+                <div class="search-actions">
+                    <button type="button" class="btn btn-promo" id="add-promo-btn"><i class="fa-solid fa-plus"></i> Add Promo Code</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Show Places</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Perfect Places Section -->
+    <section class="container">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>Plan your perfect trip</h2>
+                <p>Search Flights & Places Hire to our most popular destinations</p>
+            </div>
+            <a href="#" class="btn btn-outline">See more places</a>
+        </div>
+
+        <div class="places-grid">
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Istanbul">
+                <div class="place-info">
+                    <h4>Istanbul, Turkey</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Sydney">
+                <div class="place-info">
+                    <h4>Sydney, Australia</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Baku">
+                <div class="place-info">
+                    <h4>Baku, Azerbaijan</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Male">
+                <div class="place-info">
+                    <h4>Malé, Maldives</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Paris">
+                <div class="place-info">
+                    <h4>Paris, France</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+            <div class="place-card">
+                <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=200&q=80" class="place-img" alt="Dubai">
+                <div class="place-info">
+                    <h4>Dubai, UAE</h4>
+                    <p>Flights • Hotels • Resorts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Banners -->
+    <section class="container">
+        <div id="flights-section" class="category-banners">
+            <div class="banner-card banner-flights">
+                <div class="banner-content">
+                    <h3>Flights</h3>
+                    <p>Search Flights & Places Hire to our most popular destinations</p>
+                    <a href="flights.html" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Show Flights</a>
+                </div>
+            </div>
+            <div id="stays-section" class="banner-card banner-hotels">
+                <div class="banner-content">
+                    <h3>Hotels</h3>
+                    <p>Search Hotels & Places Hire to our most popular destinations</p>
+                    <a href="hotels.html" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Show Hotels</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="container">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>Reviews</h2>
+                <p>What people say about Golobe facilities</p>
+            </div>
+            <a href="#" class="btn btn-outline">See All</a>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <h3 class="review-title">"A real sense of community, cozy"</h3>
+                <p class="review-text">Really convenient and the staff was super friendly. Loved the atmosphere and location!</p>
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="author-img" alt="Olga from Weave Studios - Kai Tak">
+                    <div>
+                        <div class="author-name">Olga</div>
+                        <div class="author-location">Weave Studios - Kai Tak</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <h3 class="review-title">"The best booking experience"</h3>
+                <p class="review-text">Easy to filter options and fast booking process. Will definitely use Golobe for my next trip!</p>
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="author-img" alt="Thomas from Weave Studios - Olympic">
+                    <div>
+                        <div class="author-name">Thomas</div>
+                        <div class="author-location">Weave Studios - Olympic</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <h3 class="review-title">"High quality & Great prices"</h3>
+                <p class="review-text">Found amazing flight deals that saved me hundreds of dollars. Highly recommended for travelers.</p>
+                <div class="review-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="review-author">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="author-img" alt="Eliot from Weave Studios - Sai Ying Pun">
+                    <div>
+                        <div class="author-name">Eliot</div>
+                        <div class="author-location">Weave Studios - Sai Ying Pun</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="container">
+        <div class="newsletter" aria-labelledby="newsletter-heading">
+            <div class="newsletter-text">
+                <h2>Subscribe <br>Newsletter</h2>
+                <p>The Travel<br>Get inspired! Receive travel discounts, tips and behind the scenes stories.</p>
+            </div>
+            <form id="newsletter-form" class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-secondary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fa-solid fa-paper-plane"></i> Golobe
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Destinations</h4>
+                    <ul>
+                        <li><a href="#">Canada</a></li>
+                        <li><a href="#">Alaska</a></li>
+                        <li><a href="#">France</a></li>
+                        <li><a href="#">Iceland</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Activities</h4>
+                    <ul>
+                        <li><a href="#">Northern Lights</a></li>
+                        <li><a href="#">Cruising & sailing</a></li>
+                        <li><a href="#">Multi-activity</a></li>
+                        <li><a href="#">Kayaking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Travel Blogs</h4>
+                    <ul>
+                        <li><a href="#">Bali Travel Guide</a></li>
+                        <li><a href="#">Sri Lanka Travel Guide</a></li>
+                        <li><a href="#">Peru Travel Guide</a></li>
+                        <li><a href="#">Swiss Alps Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Work with us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
