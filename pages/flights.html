@@ -22,9 +22,13 @@
             <a href="index.html" class="logo dark-logo">
                 <i class="fa-solid fa-paper-plane"></i> Golobe
             </a>
-            <div class="auth-btns">
+            <div class="auth-btns" id="auth-buttons">
                 <a href="login.html" class="btn btn-text-dark">Login</a>
                 <a href="signup.html" class="btn btn-dark">Sign up</a>
+            </div>
+            <div class="auth-btns" id="user-info" style="display: none;">
+                <span id="user-name" class="header-link"></span>
+                <button id="logout-btn" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </header>
@@ -33,7 +37,7 @@
     <div class="results-search-container">
         <form class="results-search-form container">
             <div class="field-group">
-                <input type="text" value="Lahore - Karachi">
+                <input type="text" placeholder="From - To">
             </div>
             <div class="field-group">
                 <select>
@@ -87,15 +91,35 @@
                 </div>
                 <div class="filter-group">
                     <h5>Airlines</h5>
-                    <label class="checkbox-label"><input type="checkbox" checked> Emirates</label>
-                    <label class="checkbox-label"><input type="checkbox"> Fly Dubai</label>
-                    <label class="checkbox-label"><input type="checkbox"> Qatar</label>
-                    <label class="checkbox-label"><input type="checkbox"> Etihad</label>
+                    <label class="checkbox-label airline-filter">
+                        <input type="checkbox" checked> 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/100px-Emirates_logo.svg.png" alt="Emirates">
+                        <span>Emirates</span>
+                    </label>
+                    <label class="checkbox-label airline-filter">
+                        <input type="checkbox"> 
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/100px-Flydubai_logo.svg.png" alt="Fly Dubai">
+                        <span>Fly Dubai</span>
+                    </label>
+                    <label class="checkbox-label airline-filter">
+                        <input type="checkbox"> 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Qatar_Airways_Logo.svg/100px-Qatar_Airways_Logo.svg.png" alt="Qatar">
+                        <span>Qatar</span>
+                    </label>
+                    <label class="checkbox-label airline-filter">
+                        <input type="checkbox"> 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Etihad_Airways_logo.svg/100px-Etihad_Airways_logo.svg.png" alt="Etihad">
+                        <span>Etihad</span>
+                    </label>
                 </div>
             </aside>
 
             <!-- Flight Results -->
             <section class="results-list">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h4>10 flights found</h4>
+                    <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+                </div>
                 <div class="flight-card">
                     <div class="airline-logo">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/150px-Emirates_logo.svg.png" alt="Emirates">
@@ -125,7 +149,7 @@
                             <span class="price-label">Starting from</span>
                             <span class="price-value">$240</span>
                         </div>
-                        <a href="flight-detail-emirates-1.html" class="btn btn-primary">View Deals</a>
+                        <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Emirates" data-route="LHE - KHI" data-price="240" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/150px-Emirates_logo.svg.png">Add to Cart</button>
                     </div>
                 </div>
 
@@ -158,7 +182,7 @@
                             <span class="price-label">Starting from</span>
                             <span class="price-value">$210</span>
                         </div>
-                        <a href="flight-detail-flydubai-1.html" class="btn btn-primary">View Deals</a>
+                        <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Fly Dubai" data-route="LHE - KHI" data-price="210" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/150px-Flydubai_logo.svg.png">Add to Cart</button>
                     </div>
                 </div>
 
@@ -191,7 +215,7 @@
                             <span class="price-label">Starting from</span>
                             <span class="price-value">$280</span>
                         </div>
-                        <a href="flight-detail-qatar-1.html" class="btn btn-primary">View Deals</a>
+                        <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Qatar Airways" data-route="LHE - KHI" data-price="280" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Qatar_Airways_Logo.svg/150px-Qatar_Airways_Logo.svg.png">Add to Cart</button>
                     </div>
                 </div>
 
@@ -222,7 +246,7 @@
                                 <span class="price-label">Starting from</span>
                                 <span class="price-value">$255</span>
                             </div>
-                            <a href="flight-detail-emirates-2.html" class="btn btn-primary">View Deals</a>
+                            <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Emirates (Morning)" data-route="LHE - KHI" data-price="255" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/150px-Emirates_logo.svg.png">Add to Cart</button>
                         </div>
                     </div>
                     <div class="flight-card">
@@ -250,7 +274,7 @@
                                 <span class="price-label">Starting from</span>
                                 <span class="price-value">$220</span>
                             </div>
-                            <a href="flight-detail-flydubai-2.html" class="btn btn-primary">View Deals</a>
+                            <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Fly Dubai (Midday)" data-route="LHE - KHI" data-price="220" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/150px-Flydubai_logo.svg.png">Add to Cart</button>
                         </div>
                     </div>
                     <div class="flight-card">
@@ -278,7 +302,7 @@
                                 <span class="price-label">Starting from</span>
                                 <span class="price-value">$265</span>
                             </div>
-                            <a href="flight-detail-etihad-1.html" class="btn btn-primary">View Deals</a>
+                            <button class="btn btn-primary add-to-cart-btn" data-type="Flight" data-name="Etihad Airways" data-route="LHE - KHI" data-price="265" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Etihad_Airways_logo.svg/150px-Etihad_Airways_logo.svg.png">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -335,5 +359,23 @@
     </footer>
     <!-- Custom JS -->
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lấy các tham số từ URL
+            const params = new URLSearchParams(window.location.search);
+            const destination = params.get('destination');
+            const trip = params.get('trip');
+            const dates = params.get('dates');
+            const passengers = params.get('passengers');
+
+            // Lấy các ô input trên thanh tìm kiếm của trang flights.html
+            const formInputs = document.querySelectorAll('.results-search-form input, .results-search-form select');
+
+            if (destination) formInputs[0].value = destination;
+            if (trip) formInputs[1].value = trip;
+            if (dates) formInputs[2].value = dates;
+            if (passengers) formInputs[3].value = passengers;
+        });
+    </script>
 </body>
 </html>

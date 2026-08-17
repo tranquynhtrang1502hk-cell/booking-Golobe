@@ -1,4 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- QUẢN LÝ GIỎ HÀNG ---
+    function updateCartIcon() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cart-item-count');
+        if (cartCountEl) {
+            cartCountEl.textContent = cart.length;
+            cartCountEl.style.display = cart.length > 0 ? 'flex' : 'none';
+        }
+    }
+
+    function addToCart(item) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(cartItem => cartItem.name === item.name && cartItem.type === item.type);
+        if (existingItem) {
+            alert(`${item.name} is already in your cart.`);
+            return;
+        }
+        cart.push(item);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartIcon();
+        alert(`Added ${item.name} to your cart!`);
+    }
+
+    // Cập nhật icon giỏ hàng khi tải trang
+    updateCartIcon();
+
+    // Gán sự kiện click cho các nút "Add to Cart"
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.matches('.add-to-cart-btn')) {
+            e.preventDefault();
+            const item = {
+                type: e.target.dataset.type,
+                name: e.target.dataset.name,
+                route: e.target.dataset.route,
+                price: parseFloat(e.target.dataset.price),
+                img: e.target.dataset.img,
+            };
+            addToCart(item);
+        }
+    });
+
+    // This section should be at the top to run on all pages
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const authButtons = document.getElementById('auth-buttons');
+    const userInfo = document.getElementById('user-info');
+    const userNameEl = document.getElementById('user-name');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (currentUser) {
+        // Nếu người dùng đã đăng nhập
+        if (authButtons) authButtons.style.display = 'none';
+        if (userInfo) {
+            userInfo.style.display = 'flex'; // Use 'flex' to align items
+            if (userNameEl) {
+                // Check if the element has the 'header-link' class for correct styling
+                const welcomeText = userNameEl.classList.contains('header-link') ? '' : 'Welcome, ';
+                userNameEl.textContent = `${welcomeText}${currentUser.name}`;
+            }
+        }
+    } else {
+        // Nếu người dùng chưa đăng nhập
+        if (authButtons) authButtons.style.display = 'flex';
+        if (userInfo) userInfo.style.display = 'none';
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            alert('Bạn đã đăng xuất.');
+            window.location.reload(); // Tải lại trang để cập nhật header
+        });
+    }
+
+    // --- LOGIC TRANG CHI TIẾT CHUYẾN BAY ---
+    const bookingActionCard = document.getElementById('booking-action-card');
+    if (bookingActionCard && currentUser) {
+        // Lấy thông tin chuyến bay từ trang
+        const price = document.querySelector('.detail-summary-price h4')?.textContent.replace('$', '');
+        const name = document.querySelector('.detail-summary-route h5')?.textContent;
+        const route = document.querySelector('.detail-summary-route p')?.textContent.split('•')[0].trim();
+        const image = document.querySelector('.detail-summary-info img')?.src;
+        bookingActionCard.innerHTML = `
+            <button class="btn btn-primary add-to-cart-btn" style="width: 100%; font-size: 18px; padding: 16px;"
+                data-type="Flight" data-name="${name}" data-route="${route}" data-price="${price}" data-img="${image}">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+            </button>
+        `;
+    }
+
     // Tab switching functionality in the search widget
     const tabBtns = document.querySelectorAll('.tab-btn');
     
@@ -91,28 +180,7 @@ if (searchForm) {
             showMoreBtn.style.display = 'none';
         });
     }
-    // ====== Hotel Search Form ======
-document.addEventListener('DOMContentLoaded', () => {
-    const hotelSearchForm = document.getElementById('hotel-search-form');
-    if (hotelSearchForm) {
-        hotelSearchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const destination = document.getElementById('hotel-destination').value;
-            const checkin = document.getElementById('check-in').value;
-            const checkout = document.getElementById('check-out').value;
-            const guests = document.getElementById('guests').value;
 
-            alert(
-                `🔍 Searching Hotels...\n\n` +
-                `📍 Destination: ${destination || 'Any'}\n` +
-                `📅 Check-in: ${checkin || 'Not set'}\n` +
-                `📅 Check-out: ${checkout || 'Not set'}\n` +
-                `👤 Guests: ${guests}\n\n` +
-                `We'll find the best hotels for you!`
-            );
-        });
-    }
-});
 // Booking Form (Book Now)
 const bookingForm = document.getElementById('booking-form');
 if (bookingForm) {
@@ -123,8 +191,19 @@ if (bookingForm) {
         const checkout = document.getElementById('checkout-date').value;
         const guests = document.getElementById('booking-guests').value;
         const room = document.getElementById('room-type').value;
+        const hotel = document.getElementById('hotel-name').textContent;
+        const total = document.getElementById('total-price').textContent;
 
-        alert(`✅ Booking Confirmed!\n\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nRoom: ${room}\n\nThank you for choosing Golobe!`);
+        alert(
+            `✅ Booking Confirmed!\n\n` +
+            `🏨 Hotel: ${hotel}\n` +
+            `📅 Check-in: ${checkin}\n` +
+            `📅 Check-out: ${checkout}\n` +
+            `👤 Guests: ${guests}\n` +
+            `🛏️ Room: ${room}\n` +
+            `💰 Total: ${total}\n\n` +
+            `Thank you for choosing Golobe! We'll send your confirmation email shortly.`
+        );
     });
 }
 

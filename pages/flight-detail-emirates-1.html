@@ -11,6 +11,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
+        .detail-page-banner {
+            height: 350px;
+            background: url('https://images.unsplash.com/photo-1583949399430-a6867666a242?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            border-radius: 24px;
+            margin-bottom: -80px;
+        }
         .detail-summary-bar {
             background: var(--white);
             padding: 24px 0;
@@ -88,12 +94,18 @@
             <a href="index.html" class="logo dark-logo">
                 <i class="fa-solid fa-paper-plane"></i> Golobe
             </a>
-            <div class="auth-btns">
+            <div class="auth-btns" id="auth-buttons">
                 <a href="login.html" class="btn btn-text-dark">Login</a>
                 <a href="signup.html" class="btn btn-dark">Sign up</a>
             </div>
+            <div class="auth-btns" id="user-info" style="display: none;">
+                <span id="user-name" class="header-link"></span>
+                <button id="logout-btn" class="btn btn-dark">Logout</button>
+            </div>
         </div>
     </header>
+
+    <div class="container"><div class="detail-page-banner"></div></div>
 
     <!-- Flight Summary Bar -->
     <div class="detail-summary-bar">
@@ -116,6 +128,9 @@
         <div class="detail-layout">
             <!-- Left Column: Details -->
             <div class="main-details">
+                <div style="margin-bottom: 24px;">
+                    <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+                </div>
                 <div class="info-card">
                     <h4>Baggage Information</h4>
                     <p>Each passenger can check in a total of 25 kg of baggage, and bring 1 piece of carry-on baggage (max 7kg).</p>
@@ -159,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="info-card login-prompt">
+                <div class="info-card login-prompt" id="booking-action-card">
                     <h4>Login or Sign up to book</h4>
                     <div class="btn-group">
                         <a href="login.html" class="btn btn-primary">Login</a>

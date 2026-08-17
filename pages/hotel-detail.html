@@ -208,6 +208,9 @@
         <div class="hotel-detail-grid">
             <!-- Left Column -->
             <div class="hotel-detail-main">
+                <div style="margin-bottom: 24px;">
+                    <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+                </div>
                 <!-- Images -->
                 <div class="detail-gallery">
                     <img id="detail-main-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" alt="Hotel" class="detail-main-img" />
@@ -314,8 +317,8 @@
                         <span class="total-price" id="total-price">$945</span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 18px; padding: 16px;">
-                        <i class="fa-solid fa-check"></i> Book Now
+                    <button type="button" id="hotel-add-to-cart" class="btn btn-primary add-to-cart-btn" style="width: 100%; font-size: 18px; padding: 16px;">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
                     </button>
                     <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px;">
                         <i class="fa-solid fa-lock"></i> Secure booking. No hidden fees.
@@ -376,6 +379,7 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script>
         // ====== Hotel Data ======
         const hotelData = {
@@ -487,6 +491,18 @@
             document.getElementById('checkout-date').value = checkout.toISOString().split('T')[0];
 
             updateTotal();
+
+            // Cập nhật nút Add to Cart
+            const totalPrice = document.getElementById('total-price').textContent.replace('$', '');
+            const nights = document.getElementById('nights-count').textContent;
+            const addToCartBtn = document.getElementById('hotel-add-to-cart');
+            
+            addToCartBtn.dataset.type = 'Hotel';
+            addToCartBtn.dataset.name = `${data.name} (${nights} nights)`;
+            addToCartBtn.dataset.route = data.address;
+            addToCartBtn.dataset.price = totalPrice;
+            addToCartBtn.dataset.img = data.image;
+
         }
 
         // ====== Change Main Image ======
@@ -506,36 +522,12 @@
         }
 
         // ====== Booking Form ======
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHotelData();
+        loadHotelData();
 
-            // Update total on date change
-            document.getElementById('checkin-date').addEventListener('change', updateTotal);
-            document.getElementById('checkout-date').addEventListener('change', updateTotal);
+        // Update total on date change
+        document.getElementById('checkin-date').addEventListener('change', updateTotal);
+        document.getElementById('checkout-date').addEventListener('change', updateTotal);
 
-            // Booking form submit
-            document.getElementById('booking-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const checkin = document.getElementById('checkin-date').value;
-                const checkout = document.getElementById('checkout-date').value;
-                const guests = document.getElementById('booking-guests').value;
-                const room = document.getElementById('room-type').value;
-                const hotel = document.getElementById('hotel-name').textContent;
-                const total = document.getElementById('total-price').textContent;
-
-                alert(
-                    `✅ Booking Confirmed!\n\n` +
-                    `🏨 Hotel: ${hotel}\n` +
-                    `📅 Check-in: ${checkin}\n` +
-                    `📅 Check-out: ${checkout}\n` +
-                    `👤 Guests: ${guests}\n` +
-                    `🛏️ Room: ${room}\n` +
-                    `💰 Total: ${total}\n\n` +
-                    `Thank you for choosing Golobe! We'll send your confirmation email shortly.`
-                );
-            });
-        });
     </script>
 </body>
 </html>

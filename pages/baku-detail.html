@@ -84,6 +84,9 @@
     </header>
 
     <main class="detail-page container">
+        <div style="margin-bottom: 24px;">
+            <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </div>
         <!-- Destination Header -->
         <section class="detail-header">
             <div class="detail-header-content">
@@ -133,11 +136,20 @@
                             <option selected>2 Guests</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Book Now</button>
+                    <button type="button" class="btn btn-primary add-to-cart-btn" style="width: 100%;"
+                        data-type="Tour"
+                        data-name="Baku, Azerbaijan"
+                        data-route="4-day tour"
+                        data-price="650"
+                        data-img="https://images.unsplash.com/photo-1617852042374-21de35a5d35c?auto=format&fit=crop&w=300&q=80">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
                 </form>
             </aside>
         </div>
     </main>
 
+    <!-- Custom JS -->
+    <script src="script.js"></script>
 </body>
 </html>

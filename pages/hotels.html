@@ -151,9 +151,13 @@
             <a href="index.html" class="logo dark-logo">
                 <i class="fa-solid fa-paper-plane"></i> Golobe
             </a>
-            <div class="auth-btns">
+            <div class="auth-btns" id="auth-buttons">
                 <a href="login.html" class="btn btn-text-dark">Login</a>
                 <a href="signup.html" class="btn btn-dark">Sign up</a>
+            </div>
+            <div class="auth-btns" id="user-info" style="display: none;">
+                <span id="user-name" class="header-link"></span>
+                <button id="logout-btn" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </header>
@@ -201,6 +205,9 @@
     </div>
 
     <div class="container" style="margin-top: 24px;">
+        <div style="margin-bottom: 24px;">
+            <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </div>
         <div id="results-stats" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
                 <strong id="result-count">9</strong> hotels found
