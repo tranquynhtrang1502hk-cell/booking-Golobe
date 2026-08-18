@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .payment-card {
+            cursor: pointer;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+        .payment-card.active {
+            border-color: #8dd3bb;
+            background-color: #f2fbf7;
+        }
+    </style>
 </head>
 <body>
 
@@ -36,8 +52,9 @@
         <div style="margin-bottom: 24px;">
             <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
         </div>
+
         <!-- Success Banner / Status -->
-        <section class="booking-status-card">
+        <section class="booking-status-card" id="bookingStatusCard" style="display: none !important; margin-bottom: 24px;">
             <div class="status-icon">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
@@ -47,6 +64,7 @@
             </div>
             <div class="status-actions">
                 <button class="btn-secondary-outline"><i class="fa-solid fa-download"></i> Download Ticket</button>
+                <button class="btn-primary"><i class="fa-solid fa-share-nodes"></i> Share</button>
             </div>
         </section>
 
@@ -57,9 +75,9 @@
                 <div class="info-card payment-methods-card">
                     <h4>Payment Method</h4>
                     
-                    <div class="payment-options">
-                        <label class="payment-card active">
-                            <input type="radio" name="payment" checked>
+                    <div class="payment-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                        <label class="payment-card active" id="cardOption">
+                            <input type="radio" name="payment" value="card" checked style="display: none;">
                             <div class="payment-info">
                                 <strong>Credit / Debit Card</strong>
                                 <span>Mastercard ending in 4242</span>
@@ -67,8 +85,8 @@
                             <i class="fa-brands fa-cc-mastercard payment-icon"></i>
                         </label>
 
-                        <label class="payment-card">
-                            <input type="radio" name="payment">
+                        <label class="payment-card" id="paypalOption">
+                            <input type="radio" name="payment" value="paypal" style="display: none;">
                             <div class="payment-info">
                                 <strong>PayPal Account</strong>
                                 <span id="paypal-email"></span>
@@ -77,31 +95,76 @@
                         </label>
                     </div>
 
-                    <!-- Payment Form Input -->
-                    <form class="payment-form">
-                        <div class="field-group" style="margin-bottom: 16px;">
-                            <label>Cardholder Name</label>
-                            <input type="text" id="card-name" placeholder="John Doe">
+                    <!-- Payment Form Input (Thẻ tín dụng) -->
+                    <form class="payment-form" id="paymentForm" style="margin-top: 20px; display: flex; flex-direction: column; gap: 16px;">
+                        <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                            <label for="cardholderName" style="font-size: 14px; font-weight: 500; color: #111827;">Cardholder Name</label>
+                            <input 
+                                type="text" 
+                                id="cardholderName" 
+                                name="cardholderName" 
+                                placeholder="e.g. JOHN DOE" 
+                                required
+                                style="width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d1d5db; border-radius: 4px; box-sizing: border-box; outline: none;">
                         </div>
-                        <div class="field-group" style="margin-bottom: 16px;">
-                            <label>Card Number</label>
-                            <input type="text" value="4242 •••• •••• 4242" placeholder="1234 5678 9101 1121">
+                        
+                        <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                            <label for="cardNumber" style="font-size: 14px; font-weight: 500; color: #111827;">Card Number</label>
+                            <input 
+                                type="text" 
+                                id="cardNumber" 
+                                name="cardNumber" 
+                                placeholder="1234 5678 9101 1121" 
+                                maxlength="19" 
+                                inputmode="numeric" 
+                                required
+                                style="width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d1d5db; border-radius: 4px; box-sizing: border-box; outline: none;">
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                            <div class="field-group">
-                                <label>Expiry Date</label>
-                                <input type="text" value="08/28" placeholder="MM/YY">
+                        
+                        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                                <label for="expiryDate" style="font-size: 14px; font-weight: 500; color: #111827;">Expiry Date</label>
+                                <input 
+                                    type="text" 
+                                    id="expiryDate" 
+                                    name="expiryDate" 
+                                    placeholder="MM/YY" 
+                                    maxlength="5" 
+                                    required
+                                    style="width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d1d5db; border-radius: 4px; box-sizing: border-box; outline: none;">
                             </div>
-                            <div class="field-group">
-                                <label>CVC / CVV</label>
-                                <input type="password" value="•••" placeholder="123">
+                            
+                            <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                                <label for="cvc" style="font-size: 14px; font-weight: 500; color: #111827;">CVC / CVV</label>
+                                <input 
+                                    type="password" 
+                                    id="cvc" 
+                                    name="cvc" 
+                                    placeholder="123" 
+                                    maxlength="4" 
+                                    inputmode="numeric" 
+                                    required
+                                    style="width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d1d5db; border-radius: 4px; box-sizing: border-box; outline: none;">
                             </div>
                         </div>
+
+                        <!-- Nút thanh toán thẻ -->
+                        <button type="submit" style="width: 100%; padding: 14px; background-color: #8dd3bb; color: #111827; border: none; border-radius: 4px; font-weight: 600; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
+                            <i class="fa-solid fa-lock"></i> Pay $240.00
+                        </button>
                     </form>
+
+                    <!-- Khung thanh toán PayPal -->
+                    <div id="paypalSection" style="display: none; text-align: center; padding: 20px 0;">
+                        <p style="margin-bottom: 16px; color: #4b5563;">You will be redirected to PayPal to complete your payment safely.</p>
+                        <button id="paypalBtn" type="button" style="width: 100%; padding: 14px; background-color: #ffc439; color: #111827; border: none; border-radius: 4px; font-weight: 600; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fa-brands fa-paypal"></i> Pay with PayPal
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Container for all tickets/bookings from the cart -->
-                <div id="tickets-container"></div>
+                <div id="tickets-container" style="margin-top: 24px;"></div>
             </div>
 
             <!-- Right Side Fare Breakdown -->
@@ -135,88 +198,127 @@
             </div>
         </div>
     </footer>
+
     <script src="script.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Điền thông tin người dùng
+            // Chuyển đổi qua lại giữa Thẻ tín dụng và PayPal
+            const cardOption = document.getElementById('cardOption');
+            const paypalOption = document.getElementById('paypalOption');
+            const paymentForm = document.getElementById('paymentForm');
+            const paypalSection = document.getElementById('paypalSection');
+
+            cardOption.addEventListener('click', () => {
+                cardOption.classList.add('active');
+                paypalOption.classList.remove('active');
+                paymentForm.style.display = 'flex';
+                paypalSection.style.display = 'none';
+            });
+
+            paypalOption.addEventListener('click', () => {
+                paypalOption.classList.add('active');
+                cardOption.classList.remove('active');
+                paymentForm.style.display = 'none';
+                paypalSection.style.display = 'block';
+            });
+
+            // Hàm xử lý hiển thị Booking Confirmed
+            function handlePaymentSuccess() {
+                const statusCard = document.getElementById('bookingStatusCard');
+                if (statusCard) {
+                    statusCard.style.setProperty('display', 'flex', 'important');
+                    statusCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                alert('Payment successful! Your booking is confirmed.');
+            }
+
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                handlePaymentSuccess();
+            });
+
+            document.getElementById('paypalBtn').addEventListener('click', function() {
+                handlePaymentSuccess();
+            });
+
+            // Lấy thông tin người dùng
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             if (currentUser) {
-                document.getElementById('card-name').value = currentUser.name;
-                document.getElementById('paypal-email').textContent = currentUser.email;
+                const cardholderName = document.getElementById('cardholderName');
+                if (cardholderName) cardholderName.value = currentUser.name;
+                const paypalEmail = document.getElementById('paypal-email');
+                if (paypalEmail) paypalEmail.textContent = currentUser.email;
             } else {
-                // Nếu chưa đăng nhập, yêu cầu đăng nhập để thanh toán
                 alert('Please log in to proceed with the payment.');
                 window.location.href = 'login.html';
                 return;
             }
 
-            // Hiển thị các sản phẩm trong giỏ hàng
+            // Đọc giỏ hàng & Xử lý hiển thị ảnh chống lỗi
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const cartContainer = document.getElementById('cart-items-container');
             const ticketsContainer = document.getElementById('tickets-container');
             const fareSummary = document.getElementById('fare-summary');
             let totalPrice = 0;
 
+            // Ảnh mặc định nếu đường dẫn bị lỗi hoặc không có ảnh
+            const fallbackImg = 'https://via.placeholder.com/150?text=Golobe';
+
             if (cart.length === 0) {
                 cartContainer.innerHTML = '<p>Your cart is empty. Add some items to proceed.</p>';
                 fareSummary.style.display = 'none';
-                // Ẩn phần vé và form thanh toán nếu giỏ hàng trống
                 document.querySelector('.checkout-left').style.display = 'none';
-                document.querySelector('.booking-status-card').style.display = 'none';
             } else {
                 cart.forEach(item => {
+                    // Kiểm tra URL ảnh hợp lệ, nếu trống dùng fallbackImg
+                    const itemImgSrc = (item.img && item.img.trim() !== '') ? item.img : fallbackImg;
+
                     cartContainer.innerHTML += `
-                        <div class="flight-mini-summary">
-                            <img src="${item.img}" alt="${item.name}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;">
+                        <div class="flight-mini-summary" style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+                            <img src="${itemImgSrc}" 
+                                 onerror="this.onerror=null; this.src='${fallbackImg}';" 
+                                 alt="${item.name}" 
+                                 style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;">
                             <div style="flex-grow: 1;">
-                                <h5>${item.name}</h5>
-                                <span style="font-size: 12px; color: var(--text-muted);">${item.type} - ${item.route}</span>
+                                <h5 style="margin:0;">${item.name}</h5>
+                                <span style="font-size: 12px; color: #6b7280;">${item.type} - ${item.route || ''}</span>
                             </div>
-                            <strong style="margin-left: auto; font-size: 16px;">$${item.price.toFixed(2)}</strong>
-                            <button class="btn-remove-item" data-item-name="${item.name}" data-item-type="${item.type}" title="Remove item" style="background: none; border: none; color: var(--danger); cursor: pointer; margin-left: 10px; font-size: 16px;"><i class="fa-solid fa-trash-can"></i></button>
+                            <strong style="margin-left: auto; font-size: 16px;">$${Number(item.price || 0).toFixed(2)}</strong>
+                            <button class="btn-remove-item" data-item-name="${item.name}" data-item-type="${item.type}" title="Remove item" style="background: none; border: none; color: #ef4444; cursor: pointer; margin-left: 10px; font-size: 16px;"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     `;
-                    totalPrice += item.price;
+                    totalPrice += Number(item.price || 0);
 
-                    // Tạo thẻ "vé" chi tiết cho từng sản phẩm
                     let ticketIcon = 'fa-solid fa-ticket';
                     if (item.type === 'Hotel') ticketIcon = 'fa-solid fa-bed';
                     if (item.type === 'Tour') ticketIcon = 'fa-solid fa-map-location-dot';
 
                     ticketsContainer.innerHTML += `
                         <div class="info-card ticket-card" style="margin-bottom: 24px;">
-                            <div class="ticket-header">
+                            <div class="ticket-header" style="display: flex; justify-content: space-between; align-items: center;">
                                 <div class="ticket-time">
-                                    <h2>${item.name}</h2>
+                                    <h2 style="margin:0;">${item.name}</h2>
                                     <span>${item.type}</span>
                                 </div>
                                 <div class="ticket-flight-icon">
                                     <i class="${ticketIcon}"></i>
                                 </div>
                                 <div class="ticket-time" style="text-align: right;">
-                                    <h2>$${item.price.toFixed(2)}</h2>
+                                    <h2 style="margin:0;">$${Number(item.price || 0).toFixed(2)}</h2>
                                     <span>Price</span>
                                 </div>
                             </div>
-
-                            <div class="ticket-divider">
-                                <div class="circle-left"></div>
-                                <div class="dashed-line"></div>
-                                <div class="circle-right"></div>
-                            </div>
-
-                            <div class="ticket-body">
-                                <div class="passenger-info">
-                                    <img src="${item.img}" alt="${item.name}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;">
+                            <div class="ticket-body" style="margin-top: 16px;">
+                                <div class="passenger-info" style="display: flex; gap: 12px; align-items: center;">
+                                    <img src="${itemImgSrc}" 
+                                         onerror="this.onerror=null; this.src='${fallbackImg}';" 
+                                         alt="${item.name}" 
+                                         style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;">
                                     <div>
-                                        <h4 id="ticket-passenger-name">${currentUser.name}</h4>
-                                        <p>Booking for</p>
+                                        <h4 style="margin:0;">${currentUser.name}</h4>
+                                        <p style="margin:0; font-size: 12px; color: #6b7280;">Booking for</p>
                                     </div>
-                                </div>
-                                <div class="flight-meta-grid">
-                                    <div><label>Details</label><strong>${item.route}</strong></div>
-                                    <div><label>Date</label><strong>07 Nov 22</strong></div>
-                                    <div><label>Booking ID</label><strong>#GLB-8839201</strong></div>
                                 </div>
                             </div>
                         </div>
@@ -224,26 +326,20 @@
                 });
 
                 fareSummary.innerHTML = `
-                    <li class="total">
+                    <li class="total" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-top: 16px;">
                         <span>Total Payment</span> 
                         <span class="total-price">$${totalPrice.toFixed(2)}</span>
                     </li>
                 `;
 
-                // Thêm trình xử lý sự kiện cho các nút xóa
                 document.querySelectorAll('.btn-remove-item').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const itemName = e.currentTarget.dataset.itemName;
                         const itemType = e.currentTarget.dataset.itemType;
 
                         if (confirm(`Are you sure you want to remove "${itemName}" from your cart?`)) {
-                            // Đọc giỏ hàng từ localStorage
                             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                            // Lọc ra sản phẩm cần xóa
                             const updatedCart = cart.filter(cartItem => !(cartItem.name === itemName && cartItem.type === itemType));
-
-                            // Cập nhật lại localStorage và tải lại trang
                             localStorage.setItem('cart', JSON.stringify(updatedCart));
                             window.location.reload();
                         }
@@ -252,4 +348,5 @@
             }
         });
     </script>
-</body></html>
+</body>
+</html>
