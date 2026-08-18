@@ -207,4 +207,104 @@ if (bookingForm) {
     });
 }
 
+    // --- LOGIC TRANG REVIEWS ---
+    const reviewFormSection = document.getElementById('review-form-section');
+    const loginToReviewPrompt = document.getElementById('login-to-review-prompt');
+    const reviewsGrid = document.querySelector('.reviews-grid');
+
+    // Mảng đánh giá mặc định
+    const defaultReviews = [
+        {
+            title: `"A real sense of community, cozy"`,
+            text: `Really convenient and the staff was super friendly. Loved the atmosphere and location!`,
+            rating: 5,
+            author: 'Olga',
+            location: 'Weave Studios - Kai Tak',
+            img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80'
+        },
+        {
+            title: `"The best booking experience"`,
+            text: `Easy to filter options and fast booking process. Will definitely use Golobe for my next trip!`,
+            rating: 5,
+            author: 'Thomas',
+            location: 'Weave Studios - Olympic',
+            img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80'
+        },
+        {
+            title: `"High quality & Great prices"`,
+            text: `Found amazing flight deals that saved me hundreds of dollars. Highly recommended for travelers.`,
+            rating: 5,
+            author: 'Eliot',
+            location: 'Weave Studios - Sai Ying Pun',
+            img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'
+        },
+        {
+            title: `"Unforgettable Experience"`,
+            text: `Everything was perfectly organized. Customer support helped me 24/7 during my trip.`,
+            rating: 5,
+            author: 'David',
+            location: 'Weave Studios - Central',
+            img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80'
+        }
+    ];
+
+    function renderReviews() {
+        if (!reviewsGrid) return;
+
+        const storedReviews = JSON.parse(localStorage.getItem('reviews')) || [];
+        const allReviews = [...defaultReviews, ...storedReviews];
+        reviewsGrid.innerHTML = ''; // Xóa các review tĩnh
+
+        allReviews.forEach(review => {
+            const ratingStars = Array(5).fill(0).map((_, i) =>
+                `<i class="fa-${i < review.rating ? 'solid' : 'regular'} fa-star"></i>`
+            ).join('');
+
+            reviewsGrid.innerHTML += `
+                <div class="review-card">
+                    <h3 class="review-title">${review.title}</h3>
+                    <p class="review-text">${review.text}</p>
+                    <div class="review-rating">${ratingStars}</div>
+                    <div class="review-author">
+                        <img src="${review.img}" class="author-img" alt="${review.author}">
+                        <div>
+                            <div class="author-name">${review.author}</div>
+                            <div class="author-location">${review.location}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Logic hiển thị form/prompt và render reviews trên trang reviews.html
+    if (reviewFormSection) {
+        if (currentUser) {
+            reviewFormSection.style.display = 'block';
+            const newReviewForm = document.getElementById('new-review-form');
+            newReviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newReview = {
+                    title: `"${document.getElementById('review-title').value}"`,
+                    text: document.getElementById('review-text').value,
+                    rating: parseInt(document.querySelector('input[name="rating"]:checked').value),
+                    author: currentUser.name,
+                    location: 'Golobe Traveler',
+                    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80' // Ảnh đại diện mặc định
+                };
+
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                reviews.push(newReview);
+                localStorage.setItem('reviews', JSON.stringify(reviews));
+
+                alert('Thank you for your review!');
+                newReviewForm.reset();
+                renderReviews(); // Cập nhật lại danh sách review
+            });
+        } else {
+            loginToReviewPrompt.style.display = 'block';
+        }
+        renderReviews(); // Hiển thị review khi tải trang
+    }
+
 });
