@@ -8,218 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts (Montserrat) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- ===== CSS RIÊNG CHO TRANG PROMO ===== -->
     <style>
-        /* ===== NHÚNG TOÀN BỘ CSS TỪ FILE GỐC ===== */
-        :root {
-            --primary: #8DD3BB;
-            --primary-dark: #74C0A5;
-            --secondary: #112211;
-            --text-dark: #112211;
-            --text-muted: #79747E;
-            --bg-light: #FAFAFA;
-            --white: #FFFFFF;
-            --border: #EAEAEA;
-            --shadow: 0px 4px 16px rgba(17, 34, 17, 0.05);
-            --radius: 12px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--secondary);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--white);
-        }
-        .btn-secondary:hover {
-            background: #333;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--secondary);
-            border: 1px solid var(--primary);
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .btn-light {
-            background: var(--white);
-            color: var(--secondary);
-        }
-        .btn-light:hover {
-            background: #F0F0F0;
-        }
-
-        .btn-text {
-            background: transparent;
-            color: var(--white);
-        }
-        .btn-text-dark {
-            background: transparent;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        .btn-success {
-            background: #10B981;
-            color: white;
-        }
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-danger-outline {
-            background: transparent;
-            color: #EF4444;
-            border: 1px solid #EF4444;
-        }
-        .btn-danger-outline:hover {
-            background: #EF4444;
-            color: white;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            padding: 24px 0;
-            background: transparent;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
-
-        .static-header {
-            padding: 24px 0;
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--white);
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: opacity 0.2s;
-        }
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        .header-link {
-            color: var(--secondary) !important;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--white);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .dark-logo {
-            color: var(--secondary);
-        }
-
-        .auth-btns {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .cart-icon {
-            position: relative;
-            font-size: 20px;
-            color: var(--white);
-            text-decoration: none;
-        }
-        .static-header .cart-icon {
-            color: var(--secondary);
-        }
-        .cart-icon #cart-item-count {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: #FF4D4F;
-            color: white;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-            border: 1px solid var(--white);
-        }
-
-        /* ===== PAGE 5 - PROMO CODE ===== */
+        /* Chỉ thêm những style mới cho trang promo */
         .page5-main {
             padding-top: 120px;
             padding-bottom: 80px;
@@ -291,6 +85,14 @@
             letter-spacing: 0;
             font-weight: 400;
             color: #aaa;
+        }
+
+        .btn-success {
+            background: #10B981;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #059669;
         }
 
         .promo-message {
@@ -442,7 +244,7 @@
             background: var(--primary-dark);
         }
 
-        /* ===== CART SUMMARY (PHẦN TÓM TẮT) ===== */
+        /* ===== CART SUMMARY ===== */
         .promo-summary-card {
             background: var(--white);
             border-radius: var(--radius);
@@ -482,12 +284,6 @@
         .summary-row .value.discount {
             color: #10B981;
         }
-        .summary-row .value.original {
-            text-decoration: line-through;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-right: 8px;
-        }
 
         .promo-summary-actions {
             display: flex;
@@ -526,72 +322,9 @@
             }
         }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--primary);
-            padding: 60px 0;
+        /* Ghi đè một số style từ style.css để phù hợp */
+        .static-header .cart-icon {
             color: var(--secondary);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr repeat(4, 1fr);
-            gap: 40px;
-        }
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .social-links {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .social-links a {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--secondary);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .footer-col h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .footer-col ul {
-            list-style: none;
-        }
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-        .footer-col ul li a {
-            text-decoration: none;
-            color: var(--secondary);
-            opacity: 0.8;
-            font-size: 14px;
-            transition: opacity 0.2s;
-        }
-        .footer-col ul li a:hover {
-            opacity: 1;
-        }
-        @media (max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1fr repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -627,26 +360,26 @@
 
             <!-- Tiêu đề -->
             <div class="promo-header">
-                <h1><i class="fa-solid fa-ticket" style="color: var(--primary);"></i> Promo Code</h1>
-                <p>Enter your promo code or select from the suggested list to receive discounts on your trip</p>
+                <h1><i class="fa-solid fa-ticket" style="color: var(--primary);"></i> Discount Code</h1>
+                <p>Enter your code or select from the suggestions to receive discounts for your trip</p>
             </div>
 
             <div class="promo-grid">
                 <!-- Cột trái: Nhập mã + danh sách đã áp dụng -->
                 <div class="promo-input-card">
-                    <h3><i class="fa-solid fa-pen-to-square"></i> Enter Promo Code</h3>
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Enter Discount Code</h3>
                     <p class="sub">Enter your code in the box below and click <strong>Apply</strong></p>
 
                     <div class="promo-input-group">
                         <input type="text" id="promo-input" placeholder="e.g., SUMMER2026" maxlength="20">
-                        <button id="apply-promo-btn" class="btn btn-primary"><i class="fa-solid fa-check"></i> Apply</button>
+                        <button id="apply-promo-btn" class="btn btn-primary"><i class="fa-solid fa-check"></i> Áp dụng</button>
                     </div>
 
                     <div id="promo-message" class="promo-message"></div>
 
                     <!-- Danh sách mã đã áp dụng -->
                     <div class="promo-applied-list" id="applied-promos-container">
-                        <h4><i class="fa-solid fa-circle-check"></i> Promo Codes Applied</h4>
+                        <h4><i class="fa-solid fa-circle-check"></i> Discount Codes Applied</h4>
                         <div id="applied-promos-list">
                             <!-- Hiển thị động bằng JS -->
                         </div>
@@ -655,21 +388,21 @@
 
                 <!-- Cột phải: Danh sách mã gợi ý -->
                 <div class="promo-suggestions-card">
-                    <h3><i class="fa-solid fa-lightbulb"></i> Promo Code Suggestions</h3>
-                    <p class="sub">Click <strong>Use</strong> to quickly apply the corresponding code</p>
+                    <h3><i class="fa-solid fa-lightbulb"></i> Discount Code Suggestions</h3>
+                    <p class="sub">Click on a code to apply it quickly</p>
 
                     <!-- Khách quen -->
                     <div class="promo-category">
-                        <div class="category-label"><i class="fa-solid fa-crown" style="color: #F59E0B;"></i> Regular Customer</div>
-                        <div class="promo-suggestion-item" data-code="VIP2026" data-desc="15% Off for Loyal Customers" data-discount="15%">
+                        <div class="category-label"><i class="fa-solid fa-crown" style="color: #F59E0B;"></i> Regular Customers</div>
+                        <div class="promo-suggestion-item" data-code="VIP2026" data-desc="15% discount for loyal customers" data-discount="15%">
                             <span class="code">VIP2026</span>
-                            <span class="desc">15% Off for Loyal Customers</span>
+                            <span class="desc">15% discount for loyal customers</span>
                             <span class="discount">-15%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
-                        <div class="promo-suggestion-item" data-code="LOYAL10" data-desc="10% Off for VIP Members" data-discount="10%">
+                        <div class="promo-suggestion-item" data-code="LOYAL10" data-desc="10% discount for VIP members" data-discount="10%">
                             <span class="code">LOYAL10</span>
-                            <span class="desc">10% Off for VIP Members</span>
+                            <span class="desc">10% discount for VIP members</span>
                             <span class="discount">-10%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
@@ -678,15 +411,15 @@
                     <!-- Mùa hè -->
                     <div class="promo-category">
                         <div class="category-label"><i class="fa-solid fa-sun" style="color: #F97316;"></i> Summer Deals</div>
-                        <div class="promo-suggestion-item" data-code="SUMMER2026" data-desc="20% Off for Summer Flights" data-discount="20%">
+                        <div class="promo-suggestion-item" data-code="SUMMER2026" data-desc="20% discount for summer flights" data-discount="20%">
                             <span class="code">SUMMER2026</span>
-                            <span class="desc">20% Off for Summer Flights</span>
+                            <span class="desc">20% discount for summer flights</span>
                             <span class="discount">-20%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
-                        <div class="promo-suggestion-item" data-code="HOTDEAL" data-desc="12% Off for Summer Hotel Bookings" data-discount="12%">
+                        <div class="promo-suggestion-item" data-code="HOTDEAL" data-desc="12% discount for summer room bookings" data-discount="12%">
                             <span class="code">HOTDEAL</span>
-                            <span class="desc">12% Off for Summer Hotel Bookings</span>
+                            <span class="desc">12% discount for summer room bookings</span>
                             <span class="discount">-12%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
@@ -695,15 +428,15 @@
                     <!-- Khách mới -->
                     <div class="promo-category">
                         <div class="category-label"><i class="fa-solid fa-user-plus" style="color: #3B82F6;"></i> New Customers</div>
-                        <div class="promo-suggestion-item" data-code="WELCOME25" data-desc="25% Off for First-Time Bookers" data-discount="25%">
+                        <div class="promo-suggestion-item" data-code="WELCOME25" data-desc="25% discount for first-time bookings" data-discount="25%">
                             <span class="code">WELCOME25</span>
-                            <span class="desc">25% Off for First-Time Bookers</span>
+                            <span class="desc">25% discount for first-time bookings</span>
                             <span class="discount">-25%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
-                        <div class="promo-suggestion-item" data-code="NEWUSER" data-desc="10% Off for New Customers" data-discount="10%">
+                        <div class="promo-suggestion-item" data-code="NEWUSER" data-desc="10% discount for new customers" data-discount="10%">
                             <span class="code">NEWUSER</span>
-                            <span class="desc">10% Off for New Customers</span>
+                            <span class="desc">10% discount for new customers</span>
                             <span class="discount">-10%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
@@ -712,21 +445,21 @@
                     <!-- Khách sạn / Chuyến bay -->
                     <div class="promo-category">
                         <div class="category-label"><i class="fa-solid fa-hotel" style="color: #8B5CF6;"></i> Hotels &amp; Flights</div>
-                        <div class="promo-suggestion-item" data-code="HOTEL15" data-desc="15% Off for Hotel Bookings" data-discount="15%">
+                        <div class="promo-suggestion-item" data-code="HOTEL15" data-desc="15% discount for hotel bookings" data-discount="15%">
                             <span class="code">HOTEL15</span>
-                            <span class="desc">15% Off for Hotel Bookings</span>
+                            <span class="desc">15% discount for hotel bookings</span>
                             <span class="discount">-15%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
-                        <div class="promo-suggestion-item" data-code="FLIGHT8" data-desc="8% Off for Flight Tickets" data-discount="8%">
+                        <div class="promo-suggestion-item" data-code="FLIGHT8" data-desc="8% discount for flight tickets" data-discount="8%">
                             <span class="code">FLIGHT8</span>
-                            <span class="desc">8% Off for Flight Tickets</span>
+                            <span class="desc">8% discount for flight tickets</span>
                             <span class="discount">-8%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
-                        <div class="promo-suggestion-item" data-code="COMBO" data-desc="18% Off when Booking Combo Tickets + Hotel" data-discount="18%">
+                        <div class="promo-suggestion-item" data-code="COMBO" data-desc="18% discount when booking a flight + hotel combo" data-discount="18%">
                             <span class="code">COMBO</span>
-                            <span class="desc">18% Off when Booking Combo Tickets + Hotel</span>
+                            <span class="desc">18% discount when booking a flight + hotel combo</span>
                             <span class="discount">-18%</span>
                             <button class="use-btn"><i class="fa-solid fa-plus"></i> Use</button>
                         </div>
@@ -821,6 +554,7 @@
     </footer>
 
     <!-- ===== JAVASCRIPT ===== -->
+    <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -858,7 +592,7 @@
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', () => {
                     localStorage.removeItem('currentUser');
-                    alert('Bạn đã đăng xuất.');
+                    alert('You have been logged out.');
                     window.location.reload();
                 });
             }
@@ -867,20 +601,20 @@
 
             // Dữ liệu mã khuyến mãi hợp lệ
             const validPromoCodes = {
-                'VIP2026': { discount: 15, desc: '15% Off for Loyal Customers' },
-                'LOYAL10': { discount: 10, desc: '10% Off for VIP Members' },
-                'SUMMER2026': { discount: 20, desc: '20% Off for Summer Flights' },
-                'HOTDEAL': { discount: 12, desc: '12% Off for Summer Hotel Bookings' },
-                'WELCOME25': { discount: 25, desc: '25% Off for First-Time Customers' },
-                'NEWUSER': { discount: 10, desc: '10% Off for New Users' },
-                'HOTEL15': { discount: 15, desc: '15% Off for Hotel Bookings' },
-                'FLIGHT8': { discount: 8, desc: '8% Off for Flight Tickets' },
-                'COMBO': { discount: 18, desc: '18% Off when Booking Combo Tickets + Hotel' }
+                'VIP2026': { discount: 15, desc: 'Save 15% for loyal customers' },
+                'LOYAL10': { discount: 10, desc: 'Save 10% for VIP members' },
+                'SUMMER2026': { discount: 20, desc: 'Save 20% for summer flights' },
+                'HOTDEAL': { discount: 12, desc: 'Save 12% for summer hotel bookings' },
+                'WELCOME25': { discount: 25, desc: 'Save 25% for first-time bookings' },
+                'NEWUSER': { discount: 10, desc: 'Save 10% for new customers' },
+                'HOTEL15': { discount: 15, desc: 'Save 15% for hotel bookings' },
+                'FLIGHT8': { discount: 8, desc: 'Save 8% for flight tickets' },
+                'COMBO': { discount: 18, desc: 'Save 18% when booking a flight + hotel combo' }
             };
 
             // State
-            let appliedPromos = []; // Mảng các mã đã áp dụng
-            let subtotal = 450.00; // Giá trị đơn hàng mặc định
+            let appliedPromos = [];
+            let subtotal = 450.00;
 
             // DOM refs
             const promoInput = document.getElementById('promo-input');
@@ -893,34 +627,24 @@
             const codeRow = document.getElementById('promo-code-row');
             const appliedCodeDisplay = document.getElementById('applied-code-display');
             const totalEl = document.getElementById('total-value');
-
-            // Các nút "Sử dụng" trong danh sách gợi ý
             const useBtns = document.querySelectorAll('.use-btn');
 
-            // --- Hàm tính tổng giảm giá ---
             function calculateTotalDiscount() {
                 let totalDiscount = 0;
                 appliedPromos.forEach(code => {
                     const data = validPromoCodes[code];
                     if (data) {
-                        // Tính giảm giá theo tỷ lệ phần trăm
                         totalDiscount += (subtotal * data.discount) / 100;
                     }
                 });
-                // Giới hạn không âm và không vượt quá subtotal
                 return Math.min(totalDiscount, subtotal);
             }
 
-            // --- Hàm cập nhật giao diện ---
             function updateUI() {
-                // Cập nhật subtotal
                 subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-
-                // Tính tổng giảm giá
                 const totalDiscount = calculateTotalDiscount();
                 const finalTotal = subtotal - totalDiscount;
 
-                // Hiển thị dòng giảm giá
                 if (appliedPromos.length > 0 && totalDiscount > 0) {
                     discountRow.style.display = 'flex';
                     discountValueEl.textContent = `-$${totalDiscount.toFixed(2)}`;
@@ -928,7 +652,6 @@
                     discountRow.style.display = 'none';
                 }
 
-                // Hiển thị mã đã áp dụng
                 if (appliedPromos.length > 0) {
                     codeRow.style.display = 'flex';
                     appliedCodeDisplay.textContent = appliedPromos.join(', ');
@@ -936,21 +659,16 @@
                     codeRow.style.display = 'none';
                 }
 
-                // Cập nhật tổng tiền
                 totalEl.textContent = `$${finalTotal.toFixed(2)}`;
-
-                // Cập nhật danh sách mã đã áp dụng
                 renderAppliedPromos();
 
-                // Lưu vào localStorage để dùng ở các trang khác
                 localStorage.setItem('appliedPromos', JSON.stringify(appliedPromos));
                 localStorage.setItem('finalTotal', finalTotal.toFixed(2));
             }
 
-            // --- Render danh sách mã đã áp dụng ---
             function renderAppliedPromos() {
                 if (appliedPromos.length === 0) {
-                    appliedListEl.innerHTML = `<p style="color: var(--text-muted); font-size: 14px;">Chưa có mã nào được áp dụng</p>`;
+                    appliedListEl.innerHTML = `<p style="color: var(--text-muted); font-size: 14px;">No promo codes applied</p>`;
                     return;
                 }
 
@@ -969,7 +687,6 @@
                 });
                 appliedListEl.innerHTML = html;
 
-                // Gắn sự kiện xóa cho từng nút
                 document.querySelectorAll('.remove-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const codeToRemove = this.dataset.code;
@@ -980,7 +697,6 @@
                 });
             }
 
-            // --- Hiển thị thông báo ---
             function showMessage(text, type = 'info') {
                 messageEl.textContent = text;
                 messageEl.className = 'promo-message ' + type;
@@ -989,41 +705,31 @@
                 }, 5000);
             }
 
-            // --- Hàm áp dụng mã ---
             function applyPromoCode(code) {
                 const trimmedCode = code.trim().toUpperCase();
-
                 if (!trimmedCode) {
                     showMessage('Please enter a promo code.', 'error');
                     return false;
                 }
-
-                // Kiểm tra mã có tồn tại không
                 if (!validPromoCodes[trimmedCode]) {
                     showMessage(`Code "${trimmedCode}" is invalid. Please check again.`, 'error');
                     return false;
                 }
-
-                // Kiểm tra mã đã được áp dụng chưa
                 if (appliedPromos.includes(trimmedCode)) {
                     showMessage(`Code "${trimmedCode}" has already been applied.`, 'info');
                     return false;
                 }
-
-                // Áp dụng mã
                 appliedPromos.push(trimmedCode);
-                showMessage(`✅ Code "${trimmedCode}" applied successfully! Save ${validPromoCodes[trimmedCode].discount}%`, 'success');
+                showMessage(`✅ Code "${trimmedCode}" applied successfully! You saved ${validPromoCodes[trimmedCode].discount}%`, 'success');
                 promoInput.value = '';
                 updateUI();
                 return true;
             }
 
-            // --- Xử lý nút "Áp dụng" ---
             applyBtn.addEventListener('click', function() {
                 applyPromoCode(promoInput.value);
             });
 
-            // Enter trong input
             promoInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -1031,34 +737,27 @@
                 }
             });
 
-            // --- Xử lý nút "Sử dụng" trong danh sách gợi ý ---
             useBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const item = this.closest('.promo-suggestion-item');
                     if (item) {
-                        const code = item.dataset.code;
-                        applyPromoCode(code);
+                        applyPromoCode(item.dataset.code);
                     }
                 });
             });
 
-            // Bấm vào cả item để áp dụng nhanh
             document.querySelectorAll('.promo-suggestion-item').forEach(item => {
                 item.addEventListener('click', function(e) {
-                    // Không trigger nếu click vào button con
                     if (e.target.closest('.use-btn')) return;
-                    const code = this.dataset.code;
-                    applyPromoCode(code);
+                    applyPromoCode(this.dataset.code);
                 });
             });
 
-            // --- Khôi phục dữ liệu từ localStorage ---
             function restoreFromLocalStorage() {
                 const savedPromos = localStorage.getItem('appliedPromos');
                 if (savedPromos) {
                     try {
                         appliedPromos = JSON.parse(savedPromos);
-                        // Lọc chỉ giữ các mã hợp lệ
                         appliedPromos = appliedPromos.filter(code => validPromoCodes[code]);
                     } catch (e) {
                         appliedPromos = [];
@@ -1067,20 +766,17 @@
                 updateUI();
             }
 
-            // --- Nút "Tiến hành thanh toán" ---
             document.getElementById('checkout-with-promo').addEventListener('click', function(e) {
                 e.preventDefault();
                 const finalTotal = parseFloat(totalEl.textContent.replace('$', ''));
                 if (appliedPromos.length > 0) {
-                    alert(`✅ You have applied ${appliedPromos.length} promo codes.\nFinal total: $${finalTotal.toFixed(2)}`);
+                    alert(`✅ You have applied ${appliedPromos.length} promo codes.\nTotal amount to pay: $${finalTotal.toFixed(2)}`);
                 } else {
-                    alert(`💰 Final total: $${finalTotal.toFixed(2)}`);
+                    alert(`💰 Total amount to pay: $${finalTotal.toFixed(2)}`);
                 }
-                // Chuyển đến trang thanh toán
                 window.location.href = 'payment.html';
             });
 
-            // --- Khởi tạo ---
             restoreFromLocalStorage();
 
         });
