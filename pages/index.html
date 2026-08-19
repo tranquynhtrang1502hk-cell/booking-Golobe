@@ -27,16 +27,81 @@
             <div class="header-actions">
                 <a href="payment.html" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i><span id="cart-item-count">0</span></a>
             </div>
-            <div class="auth-btns" id="auth-buttons">
-                <a href="login.html" class="btn btn-text">Login</a>
-                <a href="signup.html" class="btn btn-light">Sign up</a>
-            </div>
-            <div class="auth-btns" id="user-info" style="display: none;">
-                <span id="user-name" style="color: rgb(1, 1, 1); font-weight: 600;"></span>
-                <button id="logout-btn" class="btn btn-light">Logout</button>
-            </div>
+            <!-- Khi chưa đăng nhập -->
+<div class="auth-btns" id="auth-buttons">
+  <a href="login.html" class="btn btn-text">Login</a>
+  <a href="signup.html" class="btn btn-light">Sign up</a>
+</div>
+
+<!-- Khi ĐÃ đăng nhập -->
+<div class="user-profile-wrapper" id="user-info" style="display: none;">
+  <!-- Nút bấm hiển thị Avatar & Tên (đóng vai trò trigger toggle menu) -->
+  <button class="profile-trigger" id="profile-trigger">
+    <i class="fa-solid fa-circle-user" style="font-size: 24px; color: #555;"></i>
+    <span class="user-name" id="user-name">John D.</span>
+    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+  </button>
+
+  <!-- Dropdown Menu Popup -->
+  <div class="dropdown-menu" id="profile-dropdown">
+    <!-- Thẻ thông tin user trên cùng -->
+    <div class="user-card-header">
+      <i class="fa-solid fa-circle-user" style="font-size: 24px; color: #555;"></i>
+      <div class="card-info">
+        <h4 id="dropdown-user-fullname">John Doe.</h4>
+        <span class="status-online"><span class="dot"></span> Online</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Danh sách Menu Links -->
+    <ul class="dropdown-links">
+      <li>
+        <a href="account.html">
+          <i class="fa-regular fa-user"></i>
+          <span>My account</span>
+          <i class="fa-solid fa-chevron-right arrow-next"></i>
+        </a>
+      </li>
+      <li>
+        <a href="account.html#payments">
+          <i class="fa-regular fa-credit-card"></i>
+          <span>Payments</span>
+          <i class="fa-solid fa-chevron-right arrow-next"></i>
+        </a>
+      </li>
+      <li>
+        <a href="account.html#settings">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right arrow-next"></i>
+        </a>
+      </li>
+    </ul>
+
+    <hr class="divider">
+
+    <ul class="dropdown-links">
+      <li>
+        <a href="#support">
+          <i class="fa-solid fa-circle-question"></i>
+          <span>Support</span>
+          <i class="fa-solid fa-chevron-right arrow-next"></i>
+        </a>
+      </li>
+      <li>
+        <button id="logout-btn" class="logout-link">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
         </div>
     </header>
+    
     <!-- Hero Section -->
     <section class="hero">
         <h3 class="hero-subtitle">Helping Others</h3>
