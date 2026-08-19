@@ -1114,3 +1114,229 @@ footer {
     .payment-options { grid-template-columns: 1fr; }
     .flight-meta-grid { grid-template-columns: repeat(2, 1fr); }
 }
+/* ==========================================
+   MOBILE & TABLET RESPONSIVE STYLES
+   ========================================== */
+
+/* 1. Tablet & Mobile General Layout Fixes */
+@media (max-width: 900px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    /* --- Navbar & Header --- */
+    header, .static-header {
+        position: relative;
+        padding: 16px 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+    }
+
+    .nav-links a {
+        color: var(--secondary) !important;
+    }
+
+    .logo {
+        color: var(--secondary) !important;
+    }
+
+    .cart-icon {
+        color: var(--secondary) !important;
+    }
+
+    .auth-btns .btn-text {
+        color: var(--secondary);
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        height: auto;
+        min-height: 380px;
+        margin: 0;
+        border-radius: 16px;
+        padding: 60px 16px 120px 16px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-desc {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    /* --- Search Form Widget --- */
+    .search-container {
+        margin: -80px auto 40px auto;
+        padding: 0 12px;
+    }
+
+    .search-card {
+        padding: 20px 16px;
+    }
+
+    .search-tabs {
+        gap: 16px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .search-fields {
+        grid-template-columns: 1fr; /* 1 cột trên điện thoại */
+        gap: 12px;
+    }
+
+    .search-actions {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .search-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* --- Sections & Cards Grid --- */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    .places-grid, 
+    .category-banners, 
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    .banner-card {
+        height: 320px;
+        padding: 24px 16px;
+    }
+
+    .banner-content h3 {
+        font-size: 28px;
+    }
+
+    /* --- Flight Results & Cards Layout --- */
+    .results-search-form {
+        grid-template-columns: 1fr;
+    }
+
+    .results-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .flight-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .flight-booking {
+        text-align: center;
+    }
+
+    .flight-path .line {
+        max-width: 60px;
+    }
+
+    /* --- Flight Detail Page Responsive --- */
+    .detail-summary-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .detail-summary-price {
+        text-align: left;
+    }
+
+    .detail-layout {
+        grid-template-columns: 1fr; /* Chuyển 2 cột chi tiết thành 1 cột */
+    }
+
+    /* --- Newsletter Section --- */
+    .newsletter {
+        margin-bottom: -40px;
+        padding: 24px 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .newsletter-text h2 {
+        font-size: 26px;
+    }
+
+    .newsletter-form {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .newsletter-form input,
+    .newsletter-form .btn {
+        width: 100%;
+    }
+
+    /* --- Footer --- */
+    footer {
+        padding-top: 80px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .footer-grid > div:first-child {
+        grid-column: span 2;
+    }
+}
+
+/* 2. Extra Small Mobile Screens (Dưới 480px) */
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid > div:first-child {
+        grid-column: span 1;
+    }
+
+    .hero-title {
+        font-size: 26px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+}
