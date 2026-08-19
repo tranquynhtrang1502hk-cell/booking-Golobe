@@ -40,36 +40,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // This section should be at the top to run on all pages
+    // --- QUẢN LÝ TÀI KHOẢN ---
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const authButtons = document.getElementById('auth-buttons');
     const userInfo = document.getElementById('user-info');
-    const userNameEl = document.getElementById('user-name');
+    
+    // 1. Lấy đúng 2 ID từ HTML
+    const userNameEl = document.getElementById('user-name'); // Thẻ <span id="user-name">John D.</span>
+    const dropdownFullNameEl = document.getElementById('dropdown-user-fullname'); // Thẻ <h4 id="dropdown-user-fullname">John Doe.</h4>
     const logoutBtn = document.getElementById('logout-btn');
 
     if (currentUser) {
         // Nếu người dùng đã đăng nhập
         if (authButtons) authButtons.style.display = 'none';
         if (userInfo) {
-            userInfo.style.display = 'flex'; // Use 'flex' to align items
+            userInfo.style.display = 'flex';
+            
+            // Lấy tên đầy đủ (Ví dụ: "Nguyen Van Thang" hoặc email "thang")
+            const fullName = currentUser.name || (currentUser.email ? currentUser.email.split('@')[0] : 'User');
+            
+            // Hàm rút gọn tên kiểu "John D." (Lấy Họ + chữ cái đầu của Tên)
+            const nameParts = fullName.trim().split(' ');
+            let shortName = fullName;
+            if (nameParts.length > 1) {
+                const lastName = nameParts[0];
+                const firstNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+                shortName = `${lastName} ${firstNameInitial}.`;
+            }
+
+            // 2. Cập nhật tên ngắn cho Header (John D.)
             if (userNameEl) {
-                // Check if the element has the 'header-link' class for correct styling
-                const welcomeText = userNameEl.classList.contains('header-link') ? '' : 'Welcome, ';
-                userNameEl.textContent = `${welcomeText}${currentUser.name}`;
+                const welcomeText = userNameEl.classList.contains('header-link') ? '' : '';
+                userNameEl.textContent = `${welcomeText}${shortName}`;
+            }
+
+            // 3. Cập nhật tên đầy đủ bên trong Dropdown Card (John Doe.)
+            if (dropdownFullNameEl) {
+                dropdownFullNameEl.textContent = fullName;
             }
         }
     } else {
         // Nếu người dùng chưa đăng nhập
         if (authButtons) authButtons.style.display = 'flex';
         if (userInfo) userInfo.style.display = 'none';
-    }
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            alert('Bạn đã đăng xuất.');
-            window.location.reload(); // Tải lại trang để cập nhật header
-        });
     }
 
     // --- LOGIC TRANG CHI TIẾT CHUYẾN BAY ---
@@ -88,24 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Tab switching functionality in the search widget
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all tabs
-            tabBtns.forEach(t => t.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            btn.classList.add('active');
-            
-            // Here you could add logic to change the form fields
-            // based on whether 'flights' or 'stays' is selected
-            const tabType = btn.getAttribute('data-tab');
-            console.log(`Switched to ${tabType} tab`);
-        });
-    });
-
     // Add Promo Code button
     const promoBtn = document.getElementById('add-promo-btn');
     if (promoBtn) {
@@ -115,47 +110,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Search form submission
-const searchForm = document.getElementById('search-form');
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-if (searchForm) {
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+            // 1. Lấy giá trị từ các ô input / select trong Form
+            const locationInput = document.getElementById('from-to')?.value.toLowerCase().trim() || '';
+            const tripType = document.getElementById('trip-type')?.value.toLowerCase() || '';
+            const departReturn = document.getElementById('depart-return')?.value.toLowerCase() || '';
+            const passengerClass = document.getElementById('passenger-class')?.value.toLowerCase() || '';
 
-        // 1. Lấy giá trị từ các ô input / select trong Form
-        const locationInput = document.getElementById('from-to')?.value.toLowerCase().trim() || '';
-        const tripType = document.getElementById('trip-type')?.value.toLowerCase() || '';
-        const departReturn = document.getElementById('depart-return')?.value.toLowerCase() || '';
-        const passengerClass = document.getElementById('passenger-class')?.value.toLowerCase() || '';
-
-        // 2. Kiểm tra các điều kiện để quyết định chuyển sang file nào
-        
-        // Điều kiện 1: Ưu tiên chọn theo tên Hãng / Địa điểm nhập ở From - To
-        if (locationInput.includes('emirates') || locationInput.includes('lahore')) {
-            window.location.href = 'flight-detail-emirates-1.html';
-        } 
-        else if (locationInput.includes('dubai') || locationInput.includes('flydubai')) {
-            window.location.href = 'flight-detail-flydubai-1.html';
-        } 
-        else if (locationInput.includes('qatar') || locationInput.includes('doha')) {
-            window.location.href = 'flight-detail-qatar-1.html';
-        } 
-        // Điều kiện 2: Kiểm tra theo Hạng ghế (Passenger - Class)
-        else if (passengerClass.includes('first class') || passengerClass.includes('business')) {
-            window.location.href = 'flight-detail-emirates-1.html';
-        } 
-        else if (passengerClass.includes('economy')) {
-            window.location.href = 'flight-detail-flydubai-1.html';
-        } 
-        // Điều kiện 3: Kiểm tra Loại vé (Trip: One Way / Return)
-        else if (tripType.includes('one way')) {
-            window.location.href = 'flight-detail-qatar-1.html';
-        } 
-        // Mặc định chuyển về file Emirates nếu không khớp các điều kiện trên
-        else {
-            window.location.href = 'flight-detail-emirates-1.html';
-        }
-    });
-}
+            // 2. Kiểm tra các điều kiện để quyết định chuyển sang file nào
+            if (locationInput.includes('emirates') || locationInput.includes('lahore')) {
+                window.location.href = 'flight-detail-emirates-1.html';
+            } 
+            else if (locationInput.includes('dubai') || locationInput.includes('flydubai')) {
+                window.location.href = 'flight-detail-flydubai-1.html';
+            } 
+            else if (locationInput.includes('qatar') || locationInput.includes('doha')) {
+                window.location.href = 'flight-detail-qatar-1.html';
+            } 
+            else if (passengerClass.includes('first class') || passengerClass.includes('business')) {
+                window.location.href = 'flight-detail-emirates-1.html';
+            } 
+            else if (passengerClass.includes('economy')) {
+                window.location.href = 'flight-detail-flydubai-1.html';
+            } 
+            else if (tripType.includes('one way')) {
+                window.location.href = 'flight-detail-qatar-1.html';
+            } 
+            else {
+                window.location.href = 'flight-detail-emirates-1.html';
+            }
+        });
+    }
 
     // Newsletter form submission
     const newsletterForm = document.getElementById('newsletter-form');
@@ -174,137 +163,182 @@ if (searchForm) {
 
     if (showMoreBtn && extraFlights) {
         showMoreBtn.addEventListener('click', () => {
-            // Show the extra flight cards
             extraFlights.classList.remove('hidden');
-            // Hide the "Show more" button itself
             showMoreBtn.style.display = 'none';
         });
     }
 
-// Booking Form (Book Now)
-const bookingForm = document.getElementById('booking-form');
-if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    // Booking Form (Book Now)
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const checkin = document.getElementById('checkin-date').value;
-        const checkout = document.getElementById('checkout-date').value;
-        const guests = document.getElementById('booking-guests').value;
-        const room = document.getElementById('room-type').value;
-        const hotel = document.getElementById('hotel-name').textContent;
-        const total = document.getElementById('total-price').textContent;
+            const checkin = document.getElementById('checkin-date').value;
+            const checkout = document.getElementById('checkout-date').value;
+            const guests = document.getElementById('booking-guests').value;
+            const room = document.getElementById('room-type').value;
+            const hotel = document.getElementById('hotel-name').textContent;
+            const total = document.getElementById('total-price').textContent;
 
-        alert(
-            `✅ Booking Confirmed!\n\n` +
-            `🏨 Hotel: ${hotel}\n` +
-            `📅 Check-in: ${checkin}\n` +
-            `📅 Check-out: ${checkout}\n` +
-            `👤 Guests: ${guests}\n` +
-            `🛏️ Room: ${room}\n` +
-            `💰 Total: ${total}\n\n` +
-            `Thank you for choosing Golobe! We'll send your confirmation email shortly.`
-        );
-    });
-}
-
-    // --- LOGIC TRANG REVIEWS ---
-    const reviewFormSection = document.getElementById('review-form-section');
-    const loginToReviewPrompt = document.getElementById('login-to-review-prompt');
-    const reviewsGrid = document.querySelector('.reviews-grid');
-
-    // Mảng đánh giá mặc định
-    const defaultReviews = [
-        {
-            title: `"A real sense of community, cozy"`,
-            text: `Really convenient and the staff was super friendly. Loved the atmosphere and location!`,
-            rating: 5,
-            author: 'Olga',
-            location: 'Weave Studios - Kai Tak',
-            img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80'
-        },
-        {
-            title: `"The best booking experience"`,
-            text: `Easy to filter options and fast booking process. Will definitely use Golobe for my next trip!`,
-            rating: 5,
-            author: 'Thomas',
-            location: 'Weave Studios - Olympic',
-            img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80'
-        },
-        {
-            title: `"High quality & Great prices"`,
-            text: `Found amazing flight deals that saved me hundreds of dollars. Highly recommended for travelers.`,
-            rating: 5,
-            author: 'Eliot',
-            location: 'Weave Studios - Sai Ying Pun',
-            img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'
-        },
-        {
-            title: `"Unforgettable Experience"`,
-            text: `Everything was perfectly organized. Customer support helped me 24/7 during my trip.`,
-            rating: 5,
-            author: 'David',
-            location: 'Weave Studios - Central',
-            img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80'
-        }
-    ];
-
-    function renderReviews() {
-        if (!reviewsGrid) return;
-
-        const storedReviews = JSON.parse(localStorage.getItem('reviews')) || [];
-        const allReviews = [...defaultReviews, ...storedReviews];
-        reviewsGrid.innerHTML = ''; // Xóa các review tĩnh
-
-        allReviews.forEach(review => {
-            const ratingStars = Array(5).fill(0).map((_, i) =>
-                `<i class="fa-${i < review.rating ? 'solid' : 'regular'} fa-star"></i>`
-            ).join('');
-
-            reviewsGrid.innerHTML += `
-                <div class="review-card">
-                    <h3 class="review-title">${review.title}</h3>
-                    <p class="review-text">${review.text}</p>
-                    <div class="review-rating">${ratingStars}</div>
-                    <div class="review-author">
-                        <img src="${review.img}" class="author-img" alt="${review.author}">
-                        <div>
-                            <div class="author-name">${review.author}</div>
-                            <div class="author-location">${review.location}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            alert(
+                `✅ Booking Confirmed!\n\n` +
+                `🏨 Hotel: ${hotel}\n` +
+                `📅 Check-in: ${checkin}\n` +
+                `📅 Check-out: ${checkout}\n` +
+                `👤 Guests: ${guests}\n` +
+                `🛏️ Room: ${room}\n` +
+                `💰 Total: ${total}\n\n` +
+                `Thank you for choosing Golobe! We'll send your confirmation email shortly.`
+            );
         });
     }
 
-    // Logic hiển thị form/prompt và render reviews trên trang reviews.html
-    if (reviewFormSection) {
-        if (currentUser) {
-            reviewFormSection.style.display = 'block';
-            const newReviewForm = document.getElementById('new-review-form');
-            newReviewForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const newReview = {
-                    title: `"${document.getElementById('review-title').value}"`,
-                    text: document.getElementById('review-text').value,
-                    rating: parseInt(document.querySelector('input[name="rating"]:checked').value),
-                    author: currentUser.name,
-                    location: 'Golobe Traveler',
-                    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80' // Ảnh đại diện mặc định
-                };
-
-                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-                reviews.push(newReview);
-                localStorage.setItem('reviews', JSON.stringify(reviews));
-
-                alert('Thank you for your review!');
-                newReviewForm.reset();
-                renderReviews(); // Cập nhật lại danh sách review
-            });
-        } else {
-            loginToReviewPrompt.style.display = 'block';
-        }
-        renderReviews(); // Hiển thị review khi tải trang
+    // Bọc kiểm tra cho phần thanh toán
+    const fareSummary = document.getElementById('fare-summary');
+    if (typeof totalPrice !== 'undefined' && fareSummary) {
+        fareSummary.innerHTML = `
+            <li class="total" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-top: 16px;">
+                <span>Total Payment</span> 
+                <span class="total-price">$${totalPrice.toFixed(2)}</span>
+            </li>
+        `;
     }
 
+    const payButton = document.getElementById('pay-button');
+    if (typeof totalPrice !== 'undefined' && payButton) {
+        payButton.innerHTML = `<i class="fa-solid fa-lock"></i> Pay $${totalPrice.toFixed(2)}`;
+    }
+
+    // --- DROPDOWN PROFILE MENU ---
+    const profileTrigger = document.getElementById("profile-trigger");
+    const dropdownMenu = document.getElementById("profile-dropdown");
+
+    // Bật / Tắt Dropdown Menu khi bấm vào Avatar
+    if (profileTrigger && dropdownMenu) {
+        profileTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle("active");
+        });
+
+        // Tự động đóng menu nếu người dùng click ra ngoài vùng dropdown
+        document.addEventListener("click", (e) => {
+            if (!dropdownMenu.contains(e.target) && !profileTrigger.contains(e.target)) {
+                dropdownMenu.classList.remove("active");
+            }
+        });
+    }
+
+    // Xử lý Đăng xuất (Đã tối ưu, không bị đè dữ liệu)
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("currentUser");
+            alert("Bạn đã đăng xuất.");
+            window.location.href = "index.html";
+        });
+    }
+
+    // --- QUẢN LÝ TABS ---
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    // Hàm kích hoạt Tab
+    function activateTab(tabId) {
+        tabBtns.forEach(btn => {
+            btn.classList.toggle("active", btn.getAttribute("data-tab") === tabId);
+        });
+
+        tabContents.forEach(content => {
+            content.classList.toggle("active", content.id === tabId);
+        });
+    }
+
+    // Event listener cho click Tab
+    tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetTab = btn.getAttribute("data-tab");
+            if (targetTab) activateTab(targetTab);
+        });
+    });
+
+    // Tự động nhận diện hashtag trên URL
+    const hash = window.location.hash;
+    if (hash === "#payments") {
+        activateTab("payment-tab");
+    } else if (hash === "#history") {
+        activateTab("history-tab");
+    }
+
+    // Open/Close Modal Add Card
+    const modal = document.getElementById("card-modal");
+    const openModalBtn = document.getElementById("open-add-card-modal");
+    const closeModalBtn = document.getElementById("close-card-modal");
+
+    if (openModalBtn && modal) {
+        openModalBtn.addEventListener("click", () => {
+            modal.style.display = "flex";
+        });
+    }
+
+    if (closeModalBtn && modal) {
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    }
+
+    // Xử lý chuyển đổi giữa Flights và Stays trong tab History
+    const btnFlights = document.getElementById("btn-subtab-flights");
+    const btnStays = document.getElementById("btn-subtab-stays");
+    const flightsList = document.getElementById("history-flights-list");
+    const staysList = document.getElementById("history-stays-list");
+
+    if (btnFlights && btnStays) {
+        btnFlights.addEventListener("click", () => {
+            btnFlights.classList.add("active");
+            btnStays.classList.remove("active");
+            if (flightsList) flightsList.style.display = "block";
+            if (staysList) staysList.style.display = "none";
+        });
+
+        btnStays.addEventListener("click", () => {
+            btnStays.classList.add("active");
+            btnFlights.classList.remove("active");
+            if (flightsList) flightsList.style.display = "none";
+            if (staysList) staysList.style.display = "block";
+        });
+    }
+
+    // Demo click nút Download Ticket
+    document.querySelectorAll(".btn-download-ticket").forEach(btn => {
+        btn.addEventListener("click", () => {
+            alert("Đang tải xuống vé PDF...");
+        });
+    });
+
+
+    // --- TỰ ĐỘNG CẬP NHẬT THÔNG TIN TRANG ACCOUNT ---
+    const accountHeroName = document.querySelector('.account-user-details h2');
+    if (accountHeroName && currentUser) {
+        const fullName = currentUser.name || (currentUser.email ? currentUser.email.split('@')[0] : 'User');
+        const email = currentUser.email || 'Chưa có email';
+        const dynamicAvatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=random&color=fff&size=300`;
+
+        // 1. Đồng bộ Avatar trên trang account
+        document.querySelectorAll('.nav-avatar, .card-avatar, .account-avatar').forEach(img => {
+            img.src = dynamicAvatarUrl;
+        });
+
+        // 2. Cập nhật tên & email ở phần Hero bìa tài khoản
+        const heroEmail = document.querySelector('.account-user-details p');
+        if (accountHeroName) accountHeroName.textContent = fullName;
+        if (heroEmail) heroEmail.textContent = email;
+
+        // 3. Cập nhật tên & email trong danh sách Account Details
+        const accountValues = document.querySelectorAll('.account-tab-content .value-text');
+        if (accountValues.length >= 2) {
+            accountValues[0].textContent = fullName;
+            accountValues[1].textContent = email;
+        }
+    }
 });
