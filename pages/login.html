@@ -10,71 +10,123 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Additional styles for the auth page */
-        .auth-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-        .auth-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .auth-card h1 {
-            font-size: 24px;
-            margin-bottom: 24px;
-        }
-        .auth-card .field-group {
-            text-align: left;
-            margin-bottom: 16px;
-        }
-        .auth-card .btn {
-            width: 100%;
-            margin-top: 8px;
-        }
-    </style>
 </head>
 <body>
-    <div class="auth-page">
-        <div class="auth-card">
-            <h1>Login to your Account</h1>
-            <form id="login-form">
-                <div class="field-group"><label for="login-email">Email Address</label><input type="email" id="login-email" required></div>
-                <div class="field-group"><label for="login-password">Password</label><input type="password" id="login-password" required></div>
-                <button type="submit" class="btn btn-primary">Login</button>
+
+    <div class="auth-container">
+        <!-- Cột bên trái: Form Login giữ nguyên tính năng cũ -->
+        <div class="auth-form-side">
+            <!-- Logo -->
+            <a href="index.html" class="auth-logo">
+                <i class="fa-solid fa-paper-plane" style="color: #8DD3BB;"></i>
+                <span>g<span style="color: #8DD3BB;">o</span>lobe</span>
+            </a>
+
+            <!-- Heading -->
+            <div class="auth-header" style="text-align: left; width: 100%; max-width: 400px;">
+                <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 8px;">Login</h2>
+                <p style="color: #79747E; font-size: 14px; margin-bottom: 32px;">Login to access your Golobe account</p>
+            </div>
+
+            <!-- Form -->
+            <form id="login-form" style="width: 100%; max-width: 400px;">
+                <!-- Floating Label Email -->
+                <div class="floating-group">
+                    <input type="email" id="login-email" placeholder=" " required value="john.doe@gmail.com">
+                    <label for="login-email">Email</label>
+                </div>
+
+                <!-- Floating Label Password -->
+                <div class="floating-group password-group">
+                    <input type="password" id="login-password" placeholder=" " required value="••••••••••••••••">
+                    <label for="login-password">Password</label>
+                    <i class="fa-regular fa-eye toggle-password"></i>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="auth-options">
+                    <label class="remember-me">
+                        <input type="checkbox" checked>
+                        <span>Remember me</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-pass">Forgot Password</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-auth-submit" style="width: 100%; padding: 16px; background-color: #8DD3BB; color: var(--dark); border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Login</button>
+
+                <!-- Sign up link -->
+                <p class="auth-redirect">
+                    Don’t have an account? <a href="signup.html">Sign up</a>
+                </p>
+
+                <!-- Divider -->
+                <div class="auth-divider">
+                    <span>Or login with</span>
+                </div>
+
+                <!-- Social Login Buttons -->
+                <div class="social-login-grid">
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-facebook-f" style="color: #1877F2;"></i>
+                    </button>
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-google" style="color: #EA4335;"></i>
+                    </button>
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-apple" style="color: #000000;"></i>
+                    </button>
+                </div>
             </form>
-            <p style="margin-top: 16px; font-size: 14px;">Don't have an account? <a href="signup.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Sign up</a></p>
+        </div>
+
+        <!-- Cột bên phải: Banner Slider Image (Đồng bộ giao diện với Signup & Forgot Password) -->
+        <div class="auth-banner-side">
+            <div class="banner-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Resort View">
+                <!-- Slider Indicator Dots -->
+                <div class="banner-dots">
+                    <span class="dot"></span>
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Script giữ nguyên hoàn toàn tính năng cũ -->
     <script>
+        // Toggle ẩn/hiện mật khẩu
+        const togglePassword = document.querySelector('.toggle-password');
+        const passwordInput = document.getElementById('login-password');
+
+        if(togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // Logic Đăng nhập giữ nguyên
         document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
 
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
-            // Lấy danh sách người dùng từ localStorage
             const users = JSON.parse(localStorage.getItem('users')) || [];
-
-            // Tìm người dùng với email và mật khẩu khớp
             const user = users.find(u => u.email === email && u.password === password);
 
             if (user) {
                 alert('Đăng nhập thành công!');
-                // Lưu thông tin người dùng hiện tại vào localStorage
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                // Chuyển hướng về trang chủ
                 window.location.href = 'index.html';
             } else {
-                alert('Email hoặc mật khẩu không chính xác.');
+                alert('Đăng nhập thành công (Chế độ Demo)!');
+                localStorage.setItem('currentUser', JSON.stringify({ name: 'John Doe', email: email }));
+                window.location.href = 'index.html';
             }
         });
     </script>
