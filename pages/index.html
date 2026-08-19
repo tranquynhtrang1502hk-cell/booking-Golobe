@@ -53,10 +53,16 @@
             </div>
            <form id="search-form" action="/pages 2/flight-search.html">
                 <div class="search-fields">
-                    <div class="field-group">
+                   <div class="field-group input-with-swap">
                         <label for="from-to">From - To</label>
-                        <input type="text" id="from-to" value="Lahore - Karachi">
+                            <div class="input-wrapper">
+                            <input type="text" id="from-to" name="route" value="Lahore - Karachi">
+                        <!-- Nút hoán đổi -->
+                            <button type="button" id="swap-btn" title="Swap locations">
+                                <i class="fa-solid fa-right-left"></i>
+                            </button>
                     </div>
+                </div>
                     <div class="field-group">
                         <label for="trip-type">Trip</label>
                         <select id="trip-type">
