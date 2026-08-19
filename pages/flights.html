@@ -54,8 +54,7 @@
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
         </form>
     </div>
-
-    <main class="container">
+<main class="container">
         <div class="results-layout">
             <!-- Filters Sidebar -->
             <aside class="filters-sidebar">
@@ -70,7 +69,7 @@
                 </div>
                 <div class="filter-group">
                     <h5>Departure Time</h5>
-                    <input type="range" class="price-range" min="0" max="24" value="20">
+                    <input type="range" class="time-range" min="0" max="23.9833" step="0.0167" value="20">
                     <div class="price-display">
                         <span>12:00 AM</span>
                         <span>11:59 PM</span>
@@ -93,22 +92,22 @@
                     <h5>Airlines</h5>
                     <label class="checkbox-label airline-filter">
                         <input type="checkbox" checked> 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/100px-Emirates_logo.svg.png" alt="Emirates">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2218%22%20y%3D%228%22%20width%3D%2244%22%20height%3D%2244%22%20rx%3D%2222%22%20fill%3D%22%23c8102e%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M29%2039c8-14%2014-20%2025-22-6%207-9%2013-10%2020%205-3%208-7%2011-12-1%209-6%2015-15%2018z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%23c8102e%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Emirates" loading="eager">
                         <span>Emirates</span>
                     </label>
                     <label class="checkbox-label airline-filter">
                         <input type="checkbox"> 
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/100px-Flydubai_logo.svg.png" alt="Fly Dubai">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2221%22%20fill%3D%22%23e86b22%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2035c8-2%2014-8%2020-18%202%209%207%2015%2013%2018-10-1-19%200-33%200z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M76%2029h60%22%20stroke%3D%22%23e86b22%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Fly Dubai" loading="eager">
                         <span>Fly Dubai</span>
                     </label>
                     <label class="checkbox-label airline-filter">
                         <input type="checkbox"> 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Qatar_Airways_Logo.svg/100px-Qatar_Airways_Logo.svg.png" alt="Qatar">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2222%22%20fill%3D%22%235b1b35%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2036c8-1%2011-9%2015-17%204%207%208%2012%2015%2015-9-1-17%202-30%202z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2231%22%20cy%3D%2227%22%20r%3D%222.5%22%20fill%3D%22white%22/%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%235b1b35%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Qatar" loading="eager">
                         <span>Qatar</span>
                     </label>
                     <label class="checkbox-label airline-filter">
                         <input type="checkbox"> 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Etihad_Airways_logo.svg/100px-Etihad_Airways_logo.svg.png" alt="Etihad">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2222%22%20fill%3D%22%23c7a25b%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2025h30M28%2031h24M32%2037h16%22%20stroke%3D%22white%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%23c7a25b%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Etihad" loading="eager">
                         <span>Etihad</span>
                     </label>
                 </div>
@@ -117,12 +116,12 @@
             <!-- Flight Results -->
             <section class="results-list">
                 <div class="section-header" style="margin-bottom: 20px;">
-                    <h4>10 flights found</h4>
+                    <h4>6 flights found</h4>
                     <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
                 </div>
                 <div class="flight-card">
                     <div class="airline-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/150px-Emirates_logo.svg.png" alt="Emirates">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2218%22%20y%3D%228%22%20width%3D%2244%22%20height%3D%2244%22%20rx%3D%2222%22%20fill%3D%22%23c8102e%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M29%2039c8-14%2014-20%2025-22-6%207-9%2013-10%2020%205-3%208-7%2011-12-1%209-6%2015-15%2018z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%23c8102e%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Emirates" loading="eager">
                     </div>
                     <div class="flight-details">
                         <div class="flight-time">
@@ -155,7 +154,7 @@
 
                 <div class="flight-card">
                     <div class="airline-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/150px-Flydubai_logo.svg.png" alt="Fly Dubai">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2221%22%20fill%3D%22%23e86b22%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2035c8-2%2014-8%2020-18%202%209%207%2015%2013%2018-10-1-19%200-33%200z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M76%2029h60%22%20stroke%3D%22%23e86b22%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Fly Dubai" loading="eager">
                     </div>
                     <div class="flight-details">
                         <div class="flight-time">
@@ -188,7 +187,7 @@
 
                 <div class="flight-card">
                     <div class="airline-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Qatar_Airways_Logo.svg/150px-Qatar_Airways_Logo.svg.png" alt="Qatar Airways">
+                        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2222%22%20fill%3D%22%235b1b35%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2036c8-1%2011-9%2015-17%204%207%208%2012%2015%2015-9-1-17%202-30%202z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2231%22%20cy%3D%2227%22%20r%3D%222.5%22%20fill%3D%22white%22/%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%235b1b35%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Qatar Airways" loading="eager">
                     </div>
                     <div class="flight-details">
                         <div class="flight-time">
@@ -223,7 +222,7 @@
                 <div id="extra-flights" class="hidden">
                     <div class="flight-card">
                         <div class="airline-logo">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/150px-Emirates_logo.svg.png" alt="Emirates">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2218%22%20y%3D%228%22%20width%3D%2244%22%20height%3D%2244%22%20rx%3D%2222%22%20fill%3D%22%23c8102e%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M29%2039c8-14%2014-20%2025-22-6%207-9%2013-10%2020%205-3%208-7%2011-12-1%209-6%2015-15%2018z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%23c8102e%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Emirates" loading="eager">
                         </div>
                         <div class="flight-details">
                             <div class="flight-time">
@@ -251,7 +250,7 @@
                     </div>
                     <div class="flight-card">
                         <div class="airline-logo">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Flydubai_logo.svg/150px-Flydubai_logo.svg.png" alt="Fly Dubai">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2221%22%20fill%3D%22%23e86b22%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2035c8-2%2014-8%2020-18%202%209%207%2015%2013%2018-10-1-19%200-33%200z%22%20fill%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M76%2029h60%22%20stroke%3D%22%23e86b22%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Fly Dubai" loading="eager">
                         </div>
                         <div class="flight-details">
                             <div class="flight-time">
@@ -279,7 +278,7 @@
                     </div>
                     <div class="flight-card">
                         <div class="airline-logo">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Etihad_Airways_logo.svg/150px-Etihad_Airways_logo.svg.png" alt="Etihad Airways">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2240%22%20cy%3D%2230%22%20r%3D%2222%22%20fill%3D%22%23c7a25b%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M25%2025h30M28%2031h24M32%2037h16%22%20stroke%3D%22white%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M78%2029h58%22%20stroke%3D%22%23c7a25b%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%3C/svg%3E" alt="Etihad Airways" loading="eager">
                         </div>
                         <div class="flight-details">
                             <div class="flight-time">
