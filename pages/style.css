@@ -24,14 +24,12 @@ body {
     line-height: 1.5;
 }
 
-/* Container */
 .container {
     max-width: 1240px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Buttons */
 .btn {
     padding: 12px 24px;
     border-radius: 8px;
@@ -98,7 +96,6 @@ body {
 }
 
 
-/* Navbar */
 header {
     padding: 24px 0;
     background: transparent;
@@ -201,7 +198,7 @@ header {
     border: 1px solid var(--white);
 }
 
-/* Hero Section */
+
 .hero {
     position: relative;
     height: 600px;
@@ -240,7 +237,6 @@ header {
     margin-bottom: 40px;
 }
 
-/* Search Form Widget */
 .search-container {
     max-width: 1200px;
     margin: -100px auto 80px auto;
@@ -339,7 +335,6 @@ header {
     cursor: pointer;
 }
 
-/* Section Styling */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -359,7 +354,6 @@ header {
     color: var(--text-muted);
 }
 
-/* Places Grid */
 .places-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -402,7 +396,6 @@ header {
     color: var(--text-muted);
 }
 
-/* Category Banners (Flights & Hotels) */
 .category-banners {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -514,7 +507,6 @@ header {
     color: var(--text-muted);
 }
 
-/* Newsletter Section */
 .newsletter {
     background: #CDEAE1;
     border-radius: 20px;
@@ -554,7 +546,6 @@ header {
     outline: none;
 }
 
-/* Footer */
 footer {
     background: var(--primary);
     padding: 140px 0 60px 0;
@@ -622,7 +613,6 @@ footer {
     opacity: 1;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .search-fields {
         grid-template-columns: 1fr 1fr;
@@ -858,7 +848,6 @@ footer {
 }
 
 
-/* Payment Page Styles */
 .page4-main {
     padding-top: 40px;
     padding-bottom: 80px;
@@ -1115,19 +1104,13 @@ footer {
     .flight-meta-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ==========================================
-   MOBILE & TABLET RESPONSIVE STYLES
-   ========================================== */
-
-/* Tablet & Mobile Layout Fixes */
 @media (max-width: 900px) {
     .container {
         padding: 0 16px;
     }
 
-    /* Header / Navbar */
     header {
-        position: relative; /* Tránh đè lên Hero section trên màn hình nhỏ */
+        position: relative;
         padding: 16px 0;
         background: var(--white);
         border-bottom: 1px solid var(--border);
@@ -1149,7 +1132,7 @@ footer {
     }
 
     .nav-links a {
-        color: var(--secondary) !important; /* Đảm bảo dễ đọc trên nền trắng */
+        color: var(--secondary) !important; 
     }
 
     .logo {
@@ -1164,13 +1147,12 @@ footer {
         color: var(--secondary);
     }
 
-    /* Hero Section */
     .hero {
         height: auto;
         min-height: 380px;
         margin: 0;
         border-radius: 16px;
-        padding: 60px 16px 120px 16px; /* Để trống không gian phía dưới cho Search Box */
+        padding: 60px 16px 120px 16px; 
     }
 
     .hero-subtitle {
@@ -1186,7 +1168,6 @@ footer {
         margin-bottom: 20px;
     }
 
-    /* Search Form Widget */
     .search-container {
         margin: -80px auto 40px auto;
         padding: 0 12px;
@@ -1203,7 +1184,7 @@ footer {
     }
 
     .search-fields {
-        grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất */
+        grid-template-columns: 1fr; 
         gap: 12px;
     }
 
@@ -1217,7 +1198,6 @@ footer {
         text-align: center;
     }
 
-    /* Sections Header */
     .section-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1229,11 +1209,10 @@ footer {
         font-size: 24px;
     }
 
-    /* Grids & Cards */
     .places-grid, 
     .category-banners, 
     .reviews-grid {
-        grid-template-columns: 1fr; /* 1 cột cho điện thoại */
+        grid-template-columns: 1fr; 
         gap: 16px;
         margin-bottom: 40px;
     }
@@ -1247,7 +1226,6 @@ footer {
         font-size: 28px;
     }
 
-    /* Flight Cards Layout */
     .flight-card {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1262,7 +1240,6 @@ footer {
         max-width: 60px;
     }
 
-    /* Newsletter Section */
     .newsletter {
         margin-bottom: -40px;
         padding: 24px 16px;
@@ -1289,25 +1266,31 @@ footer {
         width: 100%;
     }
 
-    /* Footer */
-    footer {
-        padding-top: 80px;
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr 1fr; /* Chia 2 cột cho footer */
-        gap: 24px;
-    }
-
-    .footer-grid > div:first-child {
-        grid-column: span 2; /* Phần logo + MXH chiếm full dòng */
-    }
+    /* Footer */    
+footer {
+    padding-top: 80px;
 }
 
-/* Extra Small Screens (Dưới 480px) */
+.footer-grid {
+    grid-template-columns: 1fr 1fr; 
+    gap: 24px;
+}
+
+.footer-grid > div:first-child {
+    grid-column: span 2; 
+}
+.footer-links-wrapper { 
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 24px 15px;
+        width: 100%;
+    }
+
+   
+
 @media (max-width: 480px) {
     .footer-grid {
-        grid-template-columns: 1fr; /* Footer về 1 cột */
+        grid-template-columns: 1fr; 
     }
 
     .footer-grid > div:first-child {
@@ -1317,10 +1300,29 @@ footer {
     .hero-title {
         font-size: 26px;
     }
+
+    .footer-links-wrapper { 
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 24px 15px;
+        width: 100%;
+    }
+
+    .footer-links-wrapper h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-links-wrapper ul {
+        font-size: 14px;
+        line-height: 1.8;
+        padding-left: 0;
+        list-style: none;
+    }
+}
 }
 
 
-/* Container chính cho User Profile */
 .user-profile-wrapper {
   position: relative;
   display: inline-block;
@@ -1345,9 +1347,8 @@ footer {
   object-fit: cover;
 }
 
-/* Dropdown Popup Card */
 .dropdown-menu {
-  display: none; /* Mặc định ẩn */
+  display: none; 
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
@@ -1359,7 +1360,6 @@ footer {
   z-index: 1000;
 }
 
-/* Class active để bật/tắt Javascript */
 .dropdown-menu.active {
   display: block;
 }
@@ -1395,7 +1395,6 @@ footer {
   margin: 12px 0;
 }
 
-/* Format Menu items */
 .dropdown-links {
   list-style: none;
   padding: 0;
@@ -1433,9 +1432,6 @@ footer {
 .dropdown-links a:hover {
   color: #8dd3bb; /* Mã màu xanh Mint chủ đạo */
 }
-/* ==========================================================================
-   1. VARIABLES & RESET
-   ========================================================================== */
 :root {
     --primary: #8DD3BB;
     --primary-dark: #70B29C;
@@ -1467,9 +1463,6 @@ body {
     padding: 0 20px;
 }
 
-/* ==========================================================================
-   2. NAVBAR / HEADER
-   ========================================================================== */
 .static-header {
     background: var(--white);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1540,7 +1533,6 @@ body {
     font-size: 14px;
 }
 
-/* USER DROPDOWN MENU */
 .dropdown-menu {
     position: absolute;
     top: 50px;
@@ -1616,9 +1608,7 @@ body {
     color: var(--text-muted);
 }
 
-/* ==========================================================================
-   3. GLOBAL BUTTONS & CARDS
-   ========================================================================== */
+
 .btn {
     padding: 12px 24px;
     border-radius: 8px;
@@ -1655,15 +1645,11 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* ==========================================================================
-   4. ACCOUNT PAGE SPECIFIC STYLES
-   ========================================================================== */
 .account-main-content {
     margin-top: 40px;
     margin-bottom: 80px;
 }
 
-/* HERO PROFILE COVER */
 .account-hero-card {
     background: var(--white);
     border-radius: var(--radius);
@@ -1735,7 +1721,6 @@ body {
     font-size: 14px;
 }
 
-/* ACCOUNT NAVIGATION TABS */
 .account-nav-tabs {
     display: flex;
     background: var(--white);
@@ -1777,7 +1762,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* ACCOUNT INFO ROWS */
 .account-card-list {
     display: flex;
     flex-direction: column;
@@ -1819,7 +1803,6 @@ body {
     gap: 12px;
 }
 
-/* TICKETS & HISTORY */
 .history-header {
     display: flex;
     justify-content: space-between;
@@ -1919,7 +1902,6 @@ body {
     cursor: pointer;
 }
 
-/* PAYMENT METHODS GRID */
 .payment-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -2005,7 +1987,6 @@ body {
     color: var(--primary-dark);
 }
 
-/* ADD CARD MODAL */
 .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -2074,11 +2055,9 @@ body {
     margin-bottom: 16px;
 }
 
-/* ==========================================================================
-   5. FOOTER & NEWSLETTER
-   ========================================================================== */
+
 .newsletter {
-    background: var(--primary);
+    background: #aae3ce;
     border-radius: var(--radius);
     padding: 40px;
     display: flex;
@@ -2095,7 +2074,7 @@ body {
 
 .newsletter-form {
     display: flex;
-    gap: 12px;
+    gap: 40px;
 }
 
 .newsletter-form input {
@@ -2106,23 +2085,32 @@ body {
     outline: none;
 }
 
+
+
 footer {
-    background: var(--secondary);
-    color: var(--white);
-    padding: 60px 0;
-    margin-top: 80px;
+    background: #8DD3BB;
+    color: #112211;
+    padding: 120px 0 40px 0;
+    margin-top: -20px;
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr repeat(4, 1fr);
+    grid-template-columns: 2fr repeat(4, 1fr); 
     gap: 40px;
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;    
+    padding: 0 20px;  
+    box-sizing: border-box;
 }
 
 .footer-logo {
     font-size: 24px;
     font-weight: 800;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -2148,6 +2136,8 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-col a {
@@ -2159,9 +2149,51 @@ footer {
 .footer-col a:hover {
     color: var(--white);
 }
-/* ==========================================
-   FIGMA LAYOUT: AUTH / LOGIN PAGE
-   ========================================== */
+
+
+   
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr; 
+        gap: 24px; 
+    }
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 20px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-col a:hover {
+    color: var(--white);
+}
 body {
     background-color: #FFFFFF !important;
 }
@@ -2178,7 +2210,6 @@ body {
     gap: 60px;
 }
 
-/* Cột Trái - Form */
 .auth-form-side {
     flex: 1;
     max-width: 512px;
@@ -2213,7 +2244,6 @@ body {
     margin-bottom: 36px;
 }
 
-/* Floating Label Inputs */
 .floating-group {
     position: relative;
     margin-bottom: 24px;
@@ -2270,7 +2300,6 @@ body {
     font-size: 18px;
 }
 
-/* Checkbox & Forgot Pass */
 .auth-options {
     display: flex;
     justify-content: space-between;
@@ -2301,7 +2330,6 @@ body {
     font-weight: 500;
 }
 
-/* Submit Button */
 .btn-auth-submit {
     width: 100%;
     height: 48px;
@@ -2333,7 +2361,6 @@ body {
     font-weight: 600;
 }
 
-/* Divider */
 .auth-divider {
     position: relative;
     text-align: center;
@@ -2361,7 +2388,6 @@ body {
     opacity: 0.5;
 }
 
-/* Social Buttons Grid */
 .social-login-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2385,7 +2411,6 @@ body {
     background: #F4FBF8;
 }
 
-/* Cột Phải - Banner Image */
 .auth-banner-side {
     flex: 1;
     height: calc(100vh - 60px);
@@ -2429,14 +2454,13 @@ body {
     border-radius: 10px;
 }
 
-/* Responsive Tablet & Mobile */
 @media (max-width: 992px) {
     .auth-container {
         padding: 20px;
         gap: 0;
     }
     .auth-banner-side {
-        display: none; /* Ẩn banner hình ảnh trên thiết bị nhỏ */
+        display: none; 
     }
     .auth-form-side {
         max-width: 100%;
