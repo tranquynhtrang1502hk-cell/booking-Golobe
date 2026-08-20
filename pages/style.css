@@ -205,7 +205,7 @@ header {
     margin: 16px;
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%),
-                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+                url('../image/nature.jpg') center/cover no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -216,7 +216,7 @@ header {
 }
 
 .hero-subtitle {
-    font-size: 32px;
+    font-size: 35px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -224,17 +224,17 @@ header {
 }
 
 .hero-title {
-    font-size: 56px;
-    font-weight: 800;
+    font-size: 80px;
+    font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     letter-spacing: 1px;
 }
 
 .hero-desc {
     font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 40px;
+    font-weight: 500;
+    margin-bottom: 24px;
 }
 
 .search-container {
