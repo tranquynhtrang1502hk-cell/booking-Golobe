@@ -394,47 +394,65 @@
         </div>
     </footer>
 
-    <!-- Custom JS -->
-    <script src="script.js"></script>
    <!-- Custom JS -->
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Nhận dữ liệu từ URL Query Params
             const params = new URLSearchParams(window.location.search);
-            const destination = params.get('destination');
-            const trip = params.get('trip');
-            const dates = params.get('dates');
-            const passengers = params.get('passengers');
-
             const formInputs = document.querySelectorAll('.results-search-form input, .results-search-form select');
-            if (destination && formInputs[0]) formInputs[0].value = destination;
-            if (trip && formInputs[1]) formInputs[1].value = trip;
-            if (dates && formInputs[2]) formInputs[2].value = dates;
-            if (passengers && formInputs[3]) formInputs[3].value = passengers;
+            if (params.get('destination') && formInputs[0]) formInputs[0].value = params.get('destination');
+            if (params.get('trip') && formInputs[1]) formInputs[1].value = params.get('trip');
+            if (params.get('dates') && formInputs[2]) formInputs[2].value = params.get('dates');
+            if (params.get('passengers') && formInputs[3]) formInputs[3].value = params.get('passengers');
 
-            // 2. THANH GIÁ (PRICE RANGE SLIDER)
+            // 2. KHAI BÁO BỘ LỌC SIDEBAR
             const priceSlider = document.querySelector('.price-range');
-            const priceDisplay = document.querySelector('.filter-group .price-display span:last-child');
+            const priceDisplay = document.querySelector('#price-display-val strong');
+            
+            const timeSlider = document.getElementById('time-filter');
+            const timeDisplay = document.getElementById('time-display-val');
 
+            const airlineCheckboxes = document.querySelectorAll('.airline-filter input[type="checkbox"]');
+            const ratingCheckboxes = document.querySelectorAll('.rating-cb');
+
+            // Bắt sự kiện Lọc giá
             if (priceSlider && priceDisplay) {
                 priceSlider.addEventListener('input', (e) => {
-                    const maxPrice = parseInt(e.target.value);
-                    priceDisplay.innerHTML = `Max: <strong>$${maxPrice}</strong>`;
+                    priceDisplay.innerText = `$${e.target.value}`;
                     filterFlights();
                 });
             }
 
-            // 3. CHECKBOX FILTERS (AIRLINES & RATING)
-            const airlineCheckboxes = document.querySelectorAll('.airline-filter input[type="checkbox"]');
-            const ratingCheckboxes = document.querySelectorAll('.filter-group:nth-child(3) input[type="checkbox"]');
+            // Bắt sự kiện Lọc thời gian cất cánh
+            if (timeSlider && timeDisplay) {
+                timeSlider.addEventListener('input', (e) => {
+                    const val = parseInt(e.target.value);
+                    timeDisplay.innerText = val === 24 ? '24:00 (Cả ngày)' : `${val.toString().padStart(2, '0')}:00`;
+                    filterFlights();
+                });
+            }
 
+            // Bắt sự kiện Checkbox
             airlineCheckboxes.forEach(cb => cb.addEventListener('change', filterFlights));
             ratingCheckboxes.forEach(cb => cb.addEventListener('change', filterFlights));
 
-            // HÀM LỌC CHUYẾN BAY (FILTER)
+            // Hàm chuyển đổi giờ "12:00 PM" -> số giờ (0-24) để so sánh
+            function parseDepartureHour(timeStr) {
+                if (!timeStr) return 0;
+                const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+                if (!match) return 0;
+                let hours = parseInt(match[1]);
+                const isPM = match[3].toUpperCase() === 'PM';
+                if (isPM && hours < 12) hours += 12;
+                if (!isPM && hours === 12) hours = 0;
+                return hours;
+            }
+
+            // HÀM LỌC TỔNG HỢP (FILTER)
             function filterFlights() {
                 const maxPrice = priceSlider ? parseInt(priceSlider.value) : Infinity;
+                const maxTime = timeSlider ? parseInt(timeSlider.value) : 24;
                 
                 const selectedAirlines = Array.from(airlineCheckboxes)
                     .filter(cb => cb.checked)
@@ -445,26 +463,28 @@
                 flightCards.forEach(card => {
                     const priceText = card.querySelector('.price-value')?.innerText.replace('$', '') || '0';
                     const cardPrice = parseInt(priceText);
+                    
                     const airlineName = card.querySelector('.flight-info span:first-child')?.innerText.trim().toLowerCase() || '';
+                    
+                    const depTimeStr = card.querySelector('.flight-time span:first-child')?.innerText.trim() || '';
+                    const depHour = parseDepartureHour(depTimeStr);
 
                     const matchesPrice = cardPrice <= maxPrice;
+                    const matchesTime = depHour <= maxTime;
                     const matchesAirline = selectedAirlines.length === 0 || selectedAirlines.some(a => airlineName.includes(a));
 
-                    if (matchesPrice && matchesAirline) {
-                        card.style.display = 'flex';
+                    if (matchesPrice && matchesAirline && matchesTime) {
+                        card.style.setProperty('display', 'flex', 'important');
                     } else {
-                        card.style.display = 'none';
+                        card.style.setProperty('display', 'none', 'important');
                     }
                 });
             }
 
-            // 4. CHỨC NĂNG SẮP XẾP KHI CLICK VÀO TAB (CHEAPEST / BEST / QUICKEST)
+            // 3. SẮP XẾP CHUYẾN BAY (SORTING)
             const sortTabs = document.querySelectorAll('.sort-tab');
-            const resultsList = document.querySelector('.results-list');
-
             sortTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Đổi class active giữa các tab
                     sortTabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
 
@@ -473,7 +493,6 @@
                 });
             });
 
-            // Hàm chuyển đổi thời gian (vd: "1h 28m") thành phút để so sánh
             function parseDuration(durationStr) {
                 if (!durationStr) return 0;
                 const hoursMatch = durationStr.match(/(\d+)h/);
@@ -483,55 +502,41 @@
                 return hours * 60 + mins;
             }
 
-            // Hàm thực hiện sắp xếp lại DOM
             function sortFlightCards(criteria) {
-                // Lấy toàn bộ thẻ card (bao gồm cả trong extra-flights nếu đã mở)
-                const cardsArray = Array.from(document.querySelectorAll('.flight-card'));
+                // Sắp xếp riêng danh sách thẻ bên ngoài
+                const mainCards = Array.from(document.querySelectorAll('.results-list > .flight-card'));
+                const extraCards = Array.from(document.querySelectorAll('#extra-flights > .flight-card'));
 
-                cardsArray.sort((a, b) => {
+                const compareFn = (a, b) => {
                     const priceA = parseInt(a.querySelector('.price-value')?.innerText.replace('$', '') || '0');
                     const priceB = parseInt(b.querySelector('.price-value')?.innerText.replace('$', '') || '0');
-
                     const ratingA = parseFloat(a.querySelector('.flight-rating')?.innerText.trim() || '0');
                     const ratingB = parseFloat(b.querySelector('.flight-rating')?.innerText.trim() || '0');
-
                     const durationA = parseDuration(a.querySelector('.flight-info span:last-child')?.innerText || '');
                     const durationB = parseDuration(b.querySelector('.flight-info span:last-child')?.innerText || '');
 
-                    if (criteria === 'cheapest') {
-                        return priceA - priceB; // Giá từ thấp đến cao
-                    } else if (criteria === 'quickest') {
-                        return durationA - durationB; // Thời gian bay từ ít đến nhiều
-                    } else if (criteria === 'best') {
-                        // "Best" ưu tiên kết hợp: Đánh giá cao nhất, nếu bằng nhau thì giá rẻ hơn
-                        if (ratingB !== ratingA) {
-                            return ratingB - ratingA;
-                        }
-                        return priceA - priceB;
-                    }
+                    if (criteria === 'cheapest') return priceA - priceB;
+                    if (criteria === 'quickest') return durationA - durationB;
+                    if (criteria === 'best') return ratingB !== ratingA ? ratingB - ratingA : priceA - priceB;
                     return 0;
-                });
+                };
 
-                // Chèn lại các card theo thứ tự mới vào trước nút Show More
-                const showMoreDiv = document.querySelector('.show-more');
-                cardsArray.forEach(card => {
-                    // Nếu card thuộc extra-flights và extra-flights chưa hiện thì giữ nguyên cấu trúc
-                    if (card.parentElement.id === 'extra-flights') {
-                        document.getElementById('extra-flights').appendChild(card);
-                    } else {
-                        resultsList.insertBefore(card, document.getElementById('extra-flights') || showMoreDiv);
-                    }
-                });
+                mainCards.sort(compareFn);
+                extraCards.sort(compareFn);
+
+                const extraContainer = document.getElementById('extra-flights');
+                mainCards.forEach(card => extraContainer.before(card));
+                extraCards.forEach(card => extraContainer.appendChild(card));
             }
 
-            // 5. NÚT SHOW MORE RESULTS
+            // 4. SHOW MORE RESULTS
             const showMoreBtn = document.getElementById('show-more-btn');
             const extraFlights = document.getElementById('extra-flights');
             if (showMoreBtn && extraFlights) {
                 showMoreBtn.addEventListener('click', () => {
                     extraFlights.classList.remove('hidden');
                     showMoreBtn.parentElement.style.display = 'none';
-                    filterFlights(); // Áp dụng lại bộ lọc cho các vé mới xuất hiện
+                    filterFlights();
                 });
             }
         });
