@@ -62,43 +62,84 @@ script.js
 ## 4. Cấu trúc project
 
 ```text
-c:\booking-Golobe\
-├── assets\
-│   ├── css\
-│   │   ├── style.css       (CSS chung cho toàn bộ trang)
-│   │   └── auth.css        (CSS riêng cho các trang đăng nhập/đăng ký)
-│   ├── js\
-│   │   ├── main.js         (JS chung: header, footer, giỏ hàng)
-│   │   ├── auth.js         (JS cho đăng nhập, đăng ký)
-│   │   ├── reviews.js      (JS cho trang đánh giá)
-│   │   └── hotels.js       (JS cho trang tìm khách sạn)
-│   └── images\
-│       └── (Nơi chứa các hình ảnh của bạn)
+```tree
+booking-Golobe/
 │
-└── pages\
-    ├── auth\
-    │   ├── login.html
-    │   └── signup.html
-    ├── destinations\
-    │   ├── baku.html
-    │   ├── dubai.html
-    │   ├── istanbul.html
-    │   ├── male.html
-    │   ├── newyork.html
-    │   ├── paris.html
-    │   ├── rome.html
-    │   ├── sydney.html
-    │   └── tokyo.html
-    ├── flights\
-    │   ├── emirates-a380.html
-    │   ├── flydubai-737.html
-    │   └── qatar-777.html
-    │
-    ├── index.html          (Trang chủ)
-    ├── flights.html        (Trang tìm kiếm chuyến bay)
-    ├── hotels.html         (Trang tìm kiếm khách sạn)
-    ├── payment.html        (Trang thanh toán)
-    ├── places.html         (Trang tất cả địa điểm)
-    └── reviews.html        (Trang đánh giá)
-
+├── css/                        # Thư mục chứa các tệp định dạng CSS chung
+│   └── login.css
+│
+├── image/                      # Thư mục chứa hình ảnh và tài nguyên truyền thông
+│   ├── arab-hotel.jpg
+│   ├── baku-hotel.jpg
+│   ├── baku-tour.jpg
+│   ├── center.jpg
+│   ├── central-park-towers.webp
+│   ├── dubai.jpg
+│   ├── Eiffelower-Suites.jpg
+│   ├── Hotel-Istanbul.jpg
+│   ├── istanbul.avif
+│   ├── Maldives.avif
+│   ├── nature.jpg
+│   ├── Paris.jpg
+│   ├── rome-italy-colosseum.jpeg
+│   ├── rydges-sydney-harbour.jpg
+│   ├── Sydney.jpg
+│   ├── Tokyo_Tower_Afterglow.JPG
+│   └── verwater-Paradise-Resort.jpg
+│
+├── pages/                      # Các trang giao diện chính của dự án
+│   ├── account.html
+│   ├── baku-detail.html
+│   ├── destination-detail.html
+│   ├── dubai-detail.html
+│   ├── flight-detail-emirates-1.html
+│   ├── flight-detail-flydubai-1.html
+│   ├── flight-detail-qatar-1.html
+│   ├── flight-detail.html
+│   ├── flight.css
+│   ├── flights.html
+│   ├── forgot-password.html
+│   ├── hotel-detail.html
+│   ├── hotel.html
+│   ├── hotels.html
+│   ├── index.html
+│   ├── login.html
+│   ├── male-detail.html
+│   ├── newyork-detail.html
+│   ├── paris-detail.html
+│   ├── payment.html
+│   ├── places.html
+│   ├── promo-code.html
+│   ├── reset-password.html
+│   ├── reviews.html
+│   ├── rome-detail.html
+│   ├── script.js               # File JavaScript xử lý logic chính
+│   ├── signup-payment.html
+│   ├── signup.html
+│   ├── style.css               # File CSS chính cho giao diện
+│   ├── sydney-detail.html
+│   ├── tokyo-detail.html
+│   └── verify-code.html
+│
+├── pages 2/                    # Các phiên bản/mô-đun trang phát triển bổ sung
+├── pages 3/
+│   ├── flight-detail.html
+│   ├── flight-search.html
+│   ├── page2.css
+│   └── page3.css
+│
+├── pages 4/
+│   ├── page4.css
+│   └── payment-confirmation.html
+│
+├── page 5/
+│   ├── page4.css
+│   └── payment-confirmation.html
+│
+├── pages 6/
+│   ├── index.html
+│   ├── login.html
+│   └── page6.css
+│
+└── README.md                   # Tệp tài liệu hướng dẫn dự án
 
