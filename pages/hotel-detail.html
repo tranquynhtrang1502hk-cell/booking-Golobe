@@ -1154,9 +1154,16 @@
                 timestamp: new Date().toISOString()
             };
 
-            let cart = JSON.parse(localStorage.getItem('bookingCart') || '[]');
-            cart.push(booking);
-            localStorage.setItem('bookingCart', JSON.stringify(cart));
+           // Đổi 'bookingCart' thành 'cart' thống nhất cho toàn dự án
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+cart.push(booking);
+localStorage.setItem('cart', JSON.stringify(cart));
+
+// Cập nhật lại số lượng trên Icon giỏ hàng (nếu có)
+const cartCountElement = document.getElementById('cart-item-count');
+if (cartCountElement) {
+    cartCountElement.textContent = cart.length;
+}
 
             const btn = this;
             const originalText = btn.innerHTML;
@@ -1171,8 +1178,8 @@
 
             setTimeout(() => {
                 if (confirm('Do you want to view your cart?')) {
-                    window.location.href = 'cart.html';
-                }
+    window.location.href = 'payment.html'; // Đổi sang payment.html
+}
             }, 300);
         });
 
